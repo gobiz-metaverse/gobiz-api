@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: Amphitrite API
+  description: 'API M1 của Gobiz'
+servers:
+  - description: Ong Vàng - Staging
+    url: 'https://ongvang.order.gobizdev.com'
+paths:
+  /api/tenants/current:
+    get:
+      summary: Get tenant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sample:
+                    type: string
