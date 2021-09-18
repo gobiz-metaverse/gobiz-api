@@ -3078,23 +3078,6 @@ components:
     Sub-Location:
       title: Sub-Location
       type: object
-      properties:
-        id:
-          type: string
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        display:
-          type: string
-        position:
-          type: integer
-        type:
-          type: string
-        parent:
-          $ref: '#/components/schemas/Location'
       x-examples:
         example-1:
           createdAt: '2019-09-27T09:21:10.503146Z'
@@ -3138,6 +3121,40 @@ components:
           language: null
       x-tags:
         - Models
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        display:
+          type: string
+        position:
+          type: integer
+        type:
+          type: string
+        parent:
+          type: object
+          properties:
+            id:
+              type: string
+            code:
+              type: string
+            name:
+              type: string
+            description:
+              type: string
+            display:
+              type: string
+            position:
+              type: string
+            type:
+              type: string
+            parent:
+              type: object
     Category-Shipment-Service:
       title: Category-Shipment-Service
       type: object
