@@ -293,6 +293,8 @@ paths:
         - Draft-Shipment
       parameters: []
       description: Lấy ra đơn nháp
+      security:
+        - bearerAuth: []
     post:
       summary: Create Draft Shipment
       operationId: post-api-customer-draft_shipments
@@ -476,6 +478,8 @@ paths:
       tags:
         - Draft-Shipment
       description: Tạo đơn nháp
+      security:
+        - bearerAuth: []
   /api/customer/shipments:
     post:
       summary: Create Shipment
@@ -716,6 +720,18 @@ paths:
                 refShipmentCode:
                   type: string
                   description: Mã đơn hàng khách hàng
+                remark:
+                  type: string
+                  description: Ghi chú cho đơn
+                note:
+                  type: string
+                  description: Ghi chú cá nhân cho đơn
+                expectedPackages:
+                  type: string
+                  description: Số lượng kiện dự kiến
+                refCustomerCode:
+                  type: string
+                  description: Mã khách hàng khách hàng
               required:
                 - draftShipmentId
             examples:
@@ -727,6 +743,8 @@ paths:
         - Shipment
       description: Tạo mới đơn ký gửi
       x-internal: false
+      security:
+        - bearerAuth: []
     get:
       summary: Get list Shipment
       operationId: get-api-customer-shipments
@@ -1242,6 +1260,8 @@ paths:
       tags:
         - Shipment
       description: Thông tin chi tiết đơn ký gửi
+      security:
+        - bearerAuth: []
     patch:
       summary: Update shipment
       operationId: patch-api-customer-shipments-code
@@ -1568,6 +1588,8 @@ paths:
                   description: Nhóm ngành hàng
       tags:
         - Shipment
+      security:
+        - bearerAuth: []
   /api/categories/shipment_services:
     get:
       summary: Get all shipment service
@@ -1733,6 +1755,8 @@ paths:
                     zaloId: '7722188066535117386'
       operationId: get-api-customer-profile
       parameters: []
+      security:
+        - bearerAuth: []
   /oauth/token:
     post:
       summary: Get token / Login
@@ -1836,6 +1860,8 @@ paths:
       operationId: get-api-customer-shipments-code-waybill
       parameters: []
       description: Danh sách mã vận đơn trong đơn ký gửi
+      security:
+        - bearerAuth: []
     post:
       summary: Add waybill in a shipment
       operationId: post-api-customer-shipments-code-waybill
@@ -1911,6 +1937,8 @@ paths:
       description: Thêm mới mã vận đơn trong đơn ký gửi
       tags:
         - Shipment
+      security:
+        - bearerAuth: []
   '/api/customer/shipments/{code}/waybill/{waybillCode}':
     parameters:
       - schema:
@@ -1966,6 +1994,8 @@ paths:
       tags:
         - Shipment
       description: Xóa mã vận đơn trong đơn ký gửi
+      security:
+        - bearerAuth: []
   /api/customer/customer_waybills/add_batch:
     post:
       summary: Create a customer waybill
@@ -2058,6 +2088,8 @@ paths:
       description: Thêm mã vận đơn khách hàng
       tags:
         - Customer-Waybill
+      security:
+        - bearerAuth: []
   /api/customer/customer_waybills:
     get:
       summary: Get list customer waybill
@@ -2160,6 +2192,8 @@ paths:
       description: Danh sách mã vận đơn của khách hàng
       tags:
         - Customer-Waybill
+      security:
+        - bearerAuth: []
   '/api/customer/customer_waybills/{id}':
     parameters:
       - schema:
@@ -2260,6 +2294,8 @@ paths:
       description: Cập nhật mã vận đơn khách hàng
       tags:
         - Customer-Waybill
+      security:
+        - bearerAuth: []
   '/api/customer/customer_waybills/{code}':
     parameters:
       - schema:
@@ -2294,6 +2330,8 @@ paths:
       description: Xóa một mã vận đơn của khách hàng
       tags:
         - Customer-Waybill
+      security:
+        - bearerAuth: []
   /api/categories/harmonized_commodity:
     get:
       summary: Get list harmonized commodity
@@ -2413,6 +2451,8 @@ paths:
       operationId: get-api-customer-shipments-code-products
       description: Danh sách các sản phẩm của đơn ký gửi
       parameters: []
+      security:
+        - bearerAuth: []
     post:
       summary: Create a product in a shipment
       operationId: post-api-customer-shipments-code-products
@@ -2556,6 +2596,8 @@ paths:
                 - unitPrice
       tags:
         - Shipment
+      security:
+        - bearerAuth: []
   '/api/customer/shipments/{code}/products/{productCode}':
     parameters:
       - schema:
@@ -2678,6 +2720,8 @@ paths:
           required: true
       tags:
         - Shipment
+      security:
+        - bearerAuth: []
   /api/customer/addresses:
     get:
       summary: List address of customer
@@ -2800,6 +2844,89 @@ paths:
       operationId: get-api-customer-addresses
       description: Các địa chỉ của khách hàng
       parameters: []
+      security:
+        - bearerAuth: []
+    post:
+      summary: Create a customer address
+      operationId: post-api-customer-addresses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer-Address'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-Response'
+              examples:
+                example-1:
+                  value:
+                    title: invalid_location
+                    status: 400
+                    detail: Can not found location with code '$command.location'
+      tags:
+        - Customer
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullname:
+                  type: string
+                phone:
+                  type: string
+                detail:
+                  type: string
+                location:
+                  type: string
+                  description: location code
+                note:
+                  type: string
+                defaultAddress:
+                  type: string
+                addressName:
+                  type: string
+              required:
+                - fullname
+                - phone
+                - detail
+                - location
+  /api/locations:
+    get:
+      summary: Get list location
+      tags:
+        - Category
+      responses: {}
+      operationId: get-api-locations
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: parent
+          description: parent location code
+        - schema:
+            type: string
+          in: query
+          name: type
+        - schema:
+            type: string
+          in: query
+          name: displayName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Location'
+      security: []
 components:
   schemas:
     Draft-Shipment:
@@ -3954,42 +4081,6 @@ components:
           type: boolean
       x-tags:
         - Models
-    Cart-Merchant:
-      title: Cart-Merchant
-      type: object
-      x-tags:
-        - Models
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        name:
-          type: string
-        marketplace:
-          $ref: '#/components/schemas/Marketplace'
-        url:
-          type: string
-        contact:
-          type: array
-          items:
-            type: object
-        products:
-          $ref: '#/components/schemas/Cart-Product'
-        services:
-          $ref: '#/components/schemas/Order-Service'
-        remark:
-          type: string
-        note:
-          type: string
-        totalValue:
-          type: number
-        totalFee:
-          type: number
-        exchangedTotalValue:
-          type: number
-        grandTotal:
-          type: number
     Marketplace:
       title: Marketplace
       type: object
