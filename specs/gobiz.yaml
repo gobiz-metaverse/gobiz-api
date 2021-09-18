@@ -16,12 +16,151 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  sample:
-                    type: string
+                $ref: '#/components/schemas/Tenant'
+              examples:
+                example-1:
+                  value:
+                    id: baogam00-769c-4f16-b934-7e4fd4036db1
+                    domain: baogam.order.gobizdev.com
+                    code: baogam
+                    name: Báo Gấm
+                    description: Con báo màu gấm
+                    contact: null
+                    tenantConfig:
+                      defaultCurrency: VND
+                      maxSkuByMerchant: 200
+                      defaultPermissions: []
+                      orderCodePrefix: BG
+                      ibizanUrl: 'http://baogam.support.gobizdev.com/'
+                      ibizanDetailUrl: 'http://baogam.support.gobizdev.com/#/tickets/{code}'
+                      roundingStrategy: FLOOR
+                      initialBalance: 0
+                      logoStandard: 'https://my.gobiz.vn/static/media/logo-color.8c0afa7e.svg'
+                      logoLite: 'https://cdn.gobiz.vn/gobiz_logo/Gobiz_no_background_64x64.png'
+                      customScript: |-
+                        window.onload = function ccss() {
+                            let node = document.createElement("div");
+                            node.setAttribute("id", "fb-root");
+
+                            document.getElementsByTagName("body")[0].appendChild(node);
+
+                            let node1 = document.createElement("div");
+                            node1.setAttribute("id", "fb-customer-chat");
+                            node1.setAttribute("class", "fb-customerchat");
+                            node1.setAttribute("page_id", "112185344430451");
+                            node1.setAttribute("attribution", "biz_inbox");
+
+                            document.getElementsByTagName("body")[0].appendChild(node1);
+
+                              window.fbAsyncInit = function() {
+                                FB.init({
+                                  xfbml            : true,
+                                  version          : 'v11.0'
+                                });
+                              };
+
+                              (function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s); js.id = id;
+                                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                                fjs.parentNode.insertBefore(js, fjs);
+                              }(document, 'script', 'facebook-jssdk'));
+                        }
+                      customExternalScripts:
+                        - 'https://connect.facebook.net/en_US/sdk.js'
+                        - 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js'
+                      customCss: "\U0001F602"
+                      customFavicon: 'https://gd4.alicdn.com/imgextra/i1/55902736/TB27H5qnUl7MKJjSZFDXXaOEpXa_!!55902736.jpg_400x400.jpg'
+                      orderAutoArchivePeriod: 1296000
+                      orderAutoConfirmPeriod: 1296000
+                      packageAutoConfirmPeriod: 864000
+                      m6Activated: true
+                      m5Activated: true
+                      m3Activated: true
+                      m5OrderUrl: 'http://baogam.m5.gobizdev.com/'
+                      m6PackageUrl: 'http://baogam.m6.gobizdev.com/'
+                      emdPercent: 50
+                      shipmentConfig:
+                        enable: true
+                        enableProductInformation: true
+                        taxFreeThreshHold: null
+                      generalConfig:
+                        enableRewardPoint: true
+                        enableCustomerLevel: true
+                        timeZoneOffset: 7
+                        disableCustomerOrderNote: true
+                        defaultCustomerStatus: INACTIVE
+                        shipmentWaybillThreshold: 1
+                        serviceAgreementUrl: gobiz.vn
+                        enableTransactionSlip: false
+                        zaloOaToken: '***'
+                        zaloOaId: null
+                        zaloAppId: '3245923477934315738'
+                        zaloOaSecretKey: '***'
+                        emailContact: contact@gobiz.vn
+                        phoneContacts:
+                          - '0123456789'
+                        otherMarketplaceEnabled: true
+                        orderProductToCartEnable: true
+                        peerPaymentEnabled: true
+                        customerRegisterAddressEnabled: false
+                        packageDamageEnabled: true
+                        packageCodeAutoGenerateDisabled: false
+                        publicTrackingInterface: true
+                        addressContact: ''
+                        bankAccount: null
+                      zaloConfig:
+                        zaloOaToken: '***'
+                        zaloOaId: null
+                        zaloOaSecretKey: '***'
+                        zaloAppId: null
+                        name: null
+                        description: null
+                        avatar: null
+                        cover: null
+                        verified: null
+                      internalLink:
+                        donkey:
+                          packageUrl: 'https://kho.shippo.vn/packages/detail/{code}'
+                        komodo:
+                          orderUrl: 'https://mua.nhaphang.com/purchase-buying/{code}'
+                          complaintUrl: 'http://mua.nhaphang.com/complaint-seller-detail/{id}'
+                          createComplaintUrl: 'http://mua.nhaphang.com/complaint-seller?orderCode={code}&showCreateForm=1'
+                        poseidon:
+                          m1Home: 'https://baogam.order.gobizdev.com'
+                      moduleUrl:
+                        'https://mua.nhaphang.com': Mua hàng
+                        'https://baogam.order.gobizdev.com/#/': Khiếu nại
+                        'https://baogam.order.gobizdev5.com/#/': duyen
+                        'http://gaodo.order.gobizdev.com/#/shipments/create': Kho
+                      currency:
+                        id: 3
+                        code: VND
+                        name: Dong
+                        description: null
+                        symbol: ₫
+                        precision: 0
+                        prefix: null
+                        suffix: ₫
+                        numberFormat: null
+                      language: vi-VN
+                      orderThreshold: 3000
+                      orderConfig:
+                        disable: false
+                        productRemarkEnabled: true
+                        productTranslateEnabled: true
+                      extensionConfig:
+                        recipientPattern: '(SCB[\\s,-]{0,})([A-Z0-9]{3,7}_[0-9]{2,8})'
+                        marketplacesEnabled:
+                          - tmall
+                          - '1688'
+                          - taobao
+                      oldRewardSystem: false
+                    suspensionSchedule: null
       tags:
         - Tenant
+      security: []
   /api/customer/draft_shipments:
     get:
       summary: Get Draft Shipment
@@ -152,17 +291,7 @@ paths:
       operationId: get-api-customer-draft_shipments
       tags:
         - Draft-Shipment
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       description: Lấy ra đơn nháp
     post:
       summary: Create Draft Shipment
@@ -174,6 +303,123 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Draft-Shipment'
+              examples:
+                example-1:
+                  value:
+                    createdAt: '2019-12-31T02:21:12.115Z'
+                    createdBy: lanhuong
+                    modifiedAt: '2019-12-31T02:21:37.993Z'
+                    modifiedBy: lanhuong
+                    id: 8e3a07d6-4301-4736-a17f-0c9b58cfd481
+                    exchangeRate: 3000
+                    totalFee: 11000
+                    configGroupId: b586dfd3-5443-4f0b-85b0-c20db89145da
+                    addressId: 1003
+                    services:
+                      - createdAt: '2019-05-16T11:20:30.688199Z'
+                        createdBy: chaos
+                        modifiedAt: null
+                        modifiedBy: null
+                        id: 2
+                        code: cargo_insurance
+                        name: Phí bảo hiểm hàng hóa
+                        description: null
+                        position: 1
+                        requires: []
+                        excludes: []
+                        serviceGroup: null
+                        defaultApplied: false
+                        needApprove: false
+                        shipping: false
+                        approved: null
+                      - createdAt: '2019-05-16T11:20:30.688199Z'
+                        createdBy: chaos
+                        modifiedAt: null
+                        modifiedBy: null
+                        id: 12
+                        code: standard_packaging
+                        name: Đóng gỗ chung
+                        description: null
+                        position: 6
+                        requires: []
+                        excludes: []
+                        serviceGroup:
+                          createdAt: '2019-09-27T09:21:10.503146Z'
+                          createdBy: chaos
+                          modifiedAt: null
+                          modifiedBy: null
+                          id: 1
+                          code: packaging_group
+                          name: Dịch vụ đóng hàng
+                          description: null
+                          position: null
+                          single: true
+                          required: false
+                        defaultApplied: false
+                        needApprove: false
+                        shipping: false
+                        approved: null
+                      - createdAt: '2019-05-16T11:20:30.688199Z'
+                        createdBy: chaos
+                        modifiedAt: null
+                        modifiedBy: null
+                        id: 8
+                        code: direct_delivery
+                        name: Vận chuyển thẳng
+                        description: null
+                        position: 2
+                        requires: []
+                        excludes:
+                          - eco_shipping
+                        serviceGroup: null
+                        defaultApplied: false
+                        needApprove: true
+                        shipping: false
+                        approved: null
+                      - createdAt: '2019-05-16T11:20:30.688199Z'
+                        createdBy: chaos
+                        modifiedAt: null
+                        modifiedBy: null
+                        id: 3
+                        code: express_shipping
+                        name: Vận chuyển nhanh
+                        description: null
+                        position: 3
+                        requires: []
+                        excludes: []
+                        serviceGroup:
+                          createdAt: '2019-09-27T09:21:10.503146Z'
+                          createdBy: chaos
+                          modifiedAt: null
+                          modifiedBy: null
+                          id: 2
+                          code: shipping_group
+                          name: Dịch vụ chuyển phát
+                          description: null
+                          position: null
+                          single: true
+                          required: true
+                        defaultApplied: false
+                        needApprove: false
+                        shipping: true
+                        approved: null
+                    fees:
+                      - id: 8818d42b-6457-4c88-a8b8-fd53f0685661
+                        feeType: management
+                        service: null
+                        provisionalAmount: 6000
+                      - id: 66916040-4d82-4070-adcd-204d09b336bd
+                        feeType: cargo_insurance
+                        service: cargo_insurance
+                        provisionalAmount: 5000
+                      - id: ef68cf29-f4f7-4af1-9660-207e379e58c8
+                        feeType: express_shipping
+                        service: express_shipping
+                        provisionalAmount: null
+                      - id: eda2da30-e6f6-47f7-919d-056c9a771595
+                        feeType: standard_packaging
+                        service: standard_packaging
+                        provisionalAmount: null
         '400':
           description: Bad Request
           content:
@@ -182,9 +428,10 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: address_not_found
-                  status: 400
-                  detail: Address not found
+                  value:
+                    title: address_not_found
+                    status: 400
+                    detail: Address not found
         '403':
           description: Forbidden
           content:
@@ -193,15 +440,11 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 user_is_banned:
-                  title: user_is_banned
-                  status: 403
-                  detail: Account is banned. You can not create new shipment!
+                  value:
+                    title: user_is_banned
+                    status: 403
+                    detail: Account is banned. You can not create new shipment!
       parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
         - schema:
             type: string
           in: header
@@ -460,11 +703,6 @@ paths:
         - schema:
             type: string
           in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
           name: Content-Type
           required: true
       requestBody:
@@ -488,6 +726,7 @@ paths:
       tags:
         - Shipment
       description: Tạo mới đơn ký gửi
+      x-internal: false
     get:
       summary: Get list Shipment
       operationId: get-api-customer-shipments
@@ -502,8 +741,8 @@ paths:
                   $ref: '#/components/schemas/Customer-Shipment'
               examples:
                 example-1:
-                  - value:
-                      createdAt: '2020-01-03T03:53:24.444Z'
+                  value:
+                    - createdAt: '2020-01-03T03:53:24.444Z'
                       createdBy: lanhuong
                       modifiedAt: '2020-01-03T03:53:24.471Z'
                       modifiedBy: lanhuong
@@ -680,16 +919,6 @@ paths:
           name: services
           description: List service code
         - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-        - schema:
             type: array
             items:
               type: string
@@ -698,6 +927,8 @@ paths:
       description: Danh sách đơn ký gửi
       tags:
         - Shipment
+      security:
+        - bearerAuth: []
   '/api/customer/shipments/{code}':
     parameters:
       - schema:
@@ -717,283 +948,284 @@ paths:
                 $ref: '#/components/schemas/Customer-Shipment'
               examples:
                 example-1:
-                  createdAt: '2021-09-01T02:37:35.543Z'
-                  createdBy: ngantk
-                  modifiedAt: '2021-09-01T02:38:16.514Z'
-                  modifiedBy: ngantk
-                  customer:
-                    avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
-                    balance: 2229391385.94
-                    code: N776
-                    contactAddress: '76'
-                    customerAuthorities:
-                      importParcel: true
-                      printParcelStamp: true
-                      draftServicesEnable: false
-                    customerGroup: null
-                    customerLevel: null
-                    customerStatus: ACTIVE
-                    dob: '1997-11-18T00:00:00Z'
-                    email: nguyenthikimnga@gobiz.vn
-                    fullname: Nga Kim
-                    gender: female
-                    id: 5
-                    nickname: Nga Kim
-                    peerPaymentConfigGroupId: null
-                    phone: '0123456788'
-                    rewardPoint: null
-                    username: ngantk
-                    zaloId: '7722188066535117386'
-                  services:
-                    - createdAt: '2021-06-16T08:17:23.808Z'
-                      createdBy: admin
-                      modifiedAt: '2021-06-16T08:17:23.808Z'
-                      modifiedBy: admin
-                      id: 955
-                      code: shipment_normal_shipping
-                      name: Vận chuyển thường
-                      description: ''
-                      position: 1
-                      requires: []
-                      dependencies: []
-                      excludes: []
-                      serviceGroup:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: '2020-12-22T07:43:52.193Z'
-                        modifiedBy: admin
-                        id: 2
-                        code: shipping_group
-                        name: Dịch vụ chuyển phát
-                        description: ''
-                        position: null
-                        single: true
-                        required: true
-                        language:
-                          name:
-                            vi: Dịch vụ chuyển phát
-                          description:
-                            vi: ''
-                      shippingClass:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: '2020-11-30T09:34:21.745Z'
-                        modifiedBy: admin
-                        id: 1
-                        code: standard
-                        name: Chuyển phát thường
-                        description: null
-                        position: null
-                        calculatedByFormula: false
-                        preferredWarehouse: null
-                        language: null
-                      defaultApplied: true
-                      needApprove: false
-                      shipping: true
-                      approved: true
-                      serviceInfo: ''
-                      alias: null
-                      dimensionWeightConversion: 1
-                      requireGroups:
-                        - packaging_group
-                      excludeGroups: []
-                      onlyStaff: false
-                      language:
-                        name:
-                          vi: Vận chuyển thường
-                        description:
-                          vi: ''
-                        serviceInfo:
-                          vi: ''
-                    - createdAt: '2021-06-16T08:17:23.789Z'
-                      createdBy: admin
-                      modifiedAt: '2021-06-16T08:17:23.789Z'
-                      modifiedBy: admin
-                      id: 952
-                      code: shipment_standard_packaging
-                      name: Đóng gỗ chung
-                      description: ''
-                      position: 5
-                      requires: []
-                      dependencies: []
-                      excludes: []
-                      serviceGroup:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: '2020-12-22T07:43:52.193Z'
-                        modifiedBy: admin
-                        id: 1
-                        code: packaging_group
-                        name: Dịch vụ đóng hàng
-                        description: ''
-                        position: null
-                        single: true
-                        required: false
-                        language:
-                          name:
-                            vi: Dịch vụ đóng hàng
-                          description:
-                            vi: ''
-                      shippingClass: null
-                      defaultApplied: false
-                      needApprove: false
-                      shipping: false
-                      approved: true
-                      serviceInfo: ''
-                      alias: null
-                      dimensionWeightConversion: 1
-                      requireGroups: null
-                      excludeGroups: null
-                      onlyStaff: false
-                      language:
-                        name:
-                          vi: Đóng gỗ chung
-                        description:
-                          vi: ''
-                        serviceInfo:
-                          vi: ''
-                  image: null
-                  status: PUTAWAY
-                  code: N776_3781572
-                  remark: null
-                  note: null
-                  provisionalAmount: 5500
-                  totalFee: 18123
-                  totalCollect: null
-                  totalCoupon: null
-                  totalUnpaid: 18123
-                  timestamp: '2021-09-01T02:37:34.818Z'
-                  totalValue: null
-                  address:
-                    createdAt: '2021-09-01T02:37:35.669Z'
+                  value:
+                    createdAt: '2021-09-01T02:37:35.543Z'
                     createdBy: ngantk
-                    modifiedAt: '2021-09-01T02:37:35.669Z'
+                    modifiedAt: '2021-09-01T02:38:16.514Z'
                     modifiedBy: ngantk
-                    id: 4050
-                    fullname: Nguyễn Thu Huệ
-                    phone: '0968182636'
-                    address: Tòa viglacera
-                    location:
-                      createdAt: '2020-11-18T07:39:41.402115Z'
-                      createdBy: ducmami
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: '6910'
-                      code: '20293'
-                      name: Xã Hòa Bắc
-                      description: null
-                      display: 'Xã Hòa Bắc, Huyện Hòa Vang, Thành phố Đà Nẵng'
-                      position: 0
-                      type: WARD
-                      parent:
+                    customer:
+                      avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
+                      balance: 2229391385.94
+                      code: N776
+                      contactAddress: '76'
+                      customerAuthorities:
+                        importParcel: true
+                        printParcelStamp: true
+                        draftServicesEnable: false
+                      customerGroup: null
+                      customerLevel: null
+                      customerStatus: ACTIVE
+                      dob: '1997-11-18T00:00:00Z'
+                      email: nguyenthikimnga@gobiz.vn
+                      fullname: Nga Kim
+                      gender: female
+                      id: 5
+                      nickname: Nga Kim
+                      peerPaymentConfigGroupId: null
+                      phone: '0123456788'
+                      rewardPoint: null
+                      username: ngantk
+                      zaloId: '7722188066535117386'
+                    services:
+                      - createdAt: '2021-06-16T08:17:23.808Z'
+                        createdBy: admin
+                        modifiedAt: '2021-06-16T08:17:23.808Z'
+                        modifiedBy: admin
+                        id: 955
+                        code: shipment_normal_shipping
+                        name: Vận chuyển thường
+                        description: ''
+                        position: 1
+                        requires: []
+                        dependencies: []
+                        excludes: []
+                        serviceGroup:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: '2020-12-22T07:43:52.193Z'
+                          modifiedBy: admin
+                          id: 2
+                          code: shipping_group
+                          name: Dịch vụ chuyển phát
+                          description: ''
+                          position: null
+                          single: true
+                          required: true
+                          language:
+                            name:
+                              vi: Dịch vụ chuyển phát
+                            description:
+                              vi: ''
+                        shippingClass:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: '2020-11-30T09:34:21.745Z'
+                          modifiedBy: admin
+                          id: 1
+                          code: standard
+                          name: Chuyển phát thường
+                          description: null
+                          position: null
+                          calculatedByFormula: false
+                          preferredWarehouse: null
+                          language: null
+                        defaultApplied: true
+                        needApprove: false
+                        shipping: true
+                        approved: true
+                        serviceInfo: ''
+                        alias: null
+                        dimensionWeightConversion: 1
+                        requireGroups:
+                          - packaging_group
+                        excludeGroups: []
+                        onlyStaff: false
+                        language:
+                          name:
+                            vi: Vận chuyển thường
+                          description:
+                            vi: ''
+                          serviceInfo:
+                            vi: ''
+                      - createdAt: '2021-06-16T08:17:23.789Z'
+                        createdBy: admin
+                        modifiedAt: '2021-06-16T08:17:23.789Z'
+                        modifiedBy: admin
+                        id: 952
+                        code: shipment_standard_packaging
+                        name: Đóng gỗ chung
+                        description: ''
+                        position: 5
+                        requires: []
+                        dependencies: []
+                        excludes: []
+                        serviceGroup:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: '2020-12-22T07:43:52.193Z'
+                          modifiedBy: admin
+                          id: 1
+                          code: packaging_group
+                          name: Dịch vụ đóng hàng
+                          description: ''
+                          position: null
+                          single: true
+                          required: false
+                          language:
+                            name:
+                              vi: Dịch vụ đóng hàng
+                            description:
+                              vi: ''
+                        shippingClass: null
+                        defaultApplied: false
+                        needApprove: false
+                        shipping: false
+                        approved: true
+                        serviceInfo: ''
+                        alias: null
+                        dimensionWeightConversion: 1
+                        requireGroups: null
+                        excludeGroups: null
+                        onlyStaff: false
+                        language:
+                          name:
+                            vi: Đóng gỗ chung
+                          description:
+                            vi: ''
+                          serviceInfo:
+                            vi: ''
+                    image: null
+                    status: PUTAWAY
+                    code: N776_3781572
+                    remark: null
+                    note: null
+                    provisionalAmount: 5500
+                    totalFee: 18123
+                    totalCollect: null
+                    totalCoupon: null
+                    totalUnpaid: 18123
+                    timestamp: '2021-09-01T02:37:34.818Z'
+                    totalValue: null
+                    address:
+                      createdAt: '2021-09-01T02:37:35.669Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-09-01T02:37:35.669Z'
+                      modifiedBy: ngantk
+                      id: 4050
+                      fullname: Nguyễn Thu Huệ
+                      phone: '0968182636'
+                      address: Tòa viglacera
+                      location:
                         createdAt: '2020-11-18T07:39:41.402115Z'
                         createdBy: ducmami
                         modifiedAt: null
                         modifiedBy: null
-                        id: '426'
-                        code: '497'
-                        name: Huyện Hòa Vang
+                        id: '6910'
+                        code: '20293'
+                        name: Xã Hòa Bắc
                         description: null
-                        display: 'Huyện Hòa Vang, Thành phố Đà Nẵng'
+                        display: 'Xã Hòa Bắc, Huyện Hòa Vang, Thành phố Đà Nẵng'
                         position: 0
-                        type: DISTRICT
+                        type: WARD
                         parent:
                           createdAt: '2020-11-18T07:39:41.402115Z'
                           createdBy: ducmami
                           modifiedAt: null
                           modifiedBy: null
-                          id: '3'
-                          code: '48'
-                          name: Thành phố Đà Nẵng
+                          id: '426'
+                          code: '497'
+                          name: Huyện Hòa Vang
                           description: null
-                          display: Thành phố Đà Nẵng
+                          display: 'Huyện Hòa Vang, Thành phố Đà Nẵng'
                           position: 0
-                          type: PROVINCE
-                          parent: null
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '3'
+                            code: '48'
+                            name: Thành phố Đà Nẵng
+                            description: null
+                            display: Thành phố Đà Nẵng
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
                           language: null
                         language: null
-                      language: null
-                    note: ''
-                    hash: 7BEF865417AD2465C43033F5C18D38D7
-                  exchangeRate: 3500
-                  actualWeight: 0.2
-                  volumetric: 0
-                  merchantName: null
-                  merchantUrl: null
-                  declareValue: null
-                  totalPaid: null
-                  totalRefund: null
-                  totalClaim: null
-                  deliveryNotice: false
-                  configGroupId: 2cc72d0a-be58-492b-8228-e44c81cf26a9
-                  waybills: []
-                  products: []
-                  receivingWarehouse:
-                    createdAt: '2020-12-14T08:13:40.003Z'
-                    createdBy: admin
-                    modifiedAt: '2020-12-14T08:13:40.003Z'
-                    modifiedBy: admin
-                    id: 29
-                    code: O-HN
-                    name: O-HN
-                    description: Kho này được tạo ra bởi ngantk
-                    position: 22
-                    location:
-                      createdAt: '2020-11-18T07:39:41.402115Z'
-                      createdBy: ducmami
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: '3296'
-                      code: '09538'
-                      name: Phường Nguyễn Trãi
-                      description: null
-                      display: 'Phường Nguyễn Trãi, Quận Hà Đông, Thành phố Hà Nội'
-                      position: 0
-                      type: WARD
-                      parent:
+                      note: ''
+                      hash: 7BEF865417AD2465C43033F5C18D38D7
+                    exchangeRate: 3500
+                    actualWeight: 0.2
+                    volumetric: 0
+                    merchantName: null
+                    merchantUrl: null
+                    declareValue: null
+                    totalPaid: null
+                    totalRefund: null
+                    totalClaim: null
+                    deliveryNotice: false
+                    configGroupId: 2cc72d0a-be58-492b-8228-e44c81cf26a9
+                    waybills: []
+                    products: []
+                    receivingWarehouse:
+                      createdAt: '2020-12-14T08:13:40.003Z'
+                      createdBy: admin
+                      modifiedAt: '2020-12-14T08:13:40.003Z'
+                      modifiedBy: admin
+                      id: 29
+                      code: O-HN
+                      name: O-HN
+                      description: Kho này được tạo ra bởi ngantk
+                      position: 22
+                      location:
                         createdAt: '2020-11-18T07:39:41.402115Z'
                         createdBy: ducmami
                         modifiedAt: null
                         modifiedBy: null
-                        id: '201'
-                        code: '268'
-                        name: Quận Hà Đông
+                        id: '3296'
+                        code: '09538'
+                        name: Phường Nguyễn Trãi
                         description: null
-                        display: 'Quận Hà Đông, Thành phố Hà Nội'
+                        display: 'Phường Nguyễn Trãi, Quận Hà Đông, Thành phố Hà Nội'
                         position: 0
-                        type: DISTRICT
+                        type: WARD
                         parent:
                           createdAt: '2020-11-18T07:39:41.402115Z'
                           createdBy: ducmami
                           modifiedAt: null
                           modifiedBy: null
-                          id: '35'
-                          code: '01'
-                          name: Thành phố Hà Nội
+                          id: '201'
+                          code: '268'
+                          name: Quận Hà Đông
                           description: null
-                          display: Thành phố Hà Nội
+                          display: 'Quận Hà Đông, Thành phố Hà Nội'
                           position: 0
-                          type: PROVINCE
-                          parent: null
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '35'
+                            code: '01'
+                            name: Thành phố Hà Nội
+                            description: null
+                            display: Thành phố Hà Nội
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
                           language: null
                         language: null
-                      language: null
-                    enabled: true
-                    delivered: true
-                    received: true
-                    address: null
-                    recipientName: null
-                    recipientAddress: null
-                    recipientPhone: null
-                  currency: CNY
-                  hsCode: null
-                  originalReceipts: []
-                  existsProduct: false
-                  refShipmentCode: null
-                  refCustomerCode: null
-                  totalProducts: null
-                  expectedPackages: null
-                  actualPackages: null
+                      enabled: true
+                      delivered: true
+                      received: true
+                      address: null
+                      recipientName: null
+                      recipientAddress: null
+                      recipientPhone: null
+                    currency: CNY
+                    hsCode: null
+                    originalReceipts: []
+                    existsProduct: false
+                    refShipmentCode: null
+                    refCustomerCode: null
+                    totalProducts: null
+                    expectedPackages: null
+                    actualPackages: null
         '404':
           description: Not Found
           content:
@@ -1002,18 +1234,11 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: shipment_not_found
-                  status: 404
-                  detail: Can not found shipment with code $code
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-        - schema:
-            type: string
-          in: header
-          name: Authorization
+                  value:
+                    title: shipment_not_found
+                    status: 404
+                    detail: Can not found shipment with code $code
+      parameters: []
       tags:
         - Shipment
       description: Thông tin chi tiết đơn ký gửi
@@ -1029,283 +1254,284 @@ paths:
                 $ref: '#/components/schemas/Customer-Shipment'
               examples:
                 example-1:
-                  createdAt: '2021-09-01T02:37:35.543Z'
-                  createdBy: ngantk
-                  modifiedAt: '2021-09-01T02:38:16.514Z'
-                  modifiedBy: ngantk
-                  customer:
-                    avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
-                    balance: 2229391385.94
-                    code: N776
-                    contactAddress: '76'
-                    customerAuthorities:
-                      importParcel: true
-                      printParcelStamp: true
-                      draftServicesEnable: false
-                    customerGroup: null
-                    customerLevel: null
-                    customerStatus: ACTIVE
-                    dob: '1997-11-18T00:00:00Z'
-                    email: nguyenthikimnga@gobiz.vn
-                    fullname: Nga Kim
-                    gender: female
-                    id: 5
-                    nickname: Nga Kim
-                    peerPaymentConfigGroupId: null
-                    phone: '0123456788'
-                    rewardPoint: null
-                    username: ngantk
-                    zaloId: '7722188066535117386'
-                  services:
-                    - createdAt: '2021-06-16T08:17:23.808Z'
-                      createdBy: admin
-                      modifiedAt: '2021-06-16T08:17:23.808Z'
-                      modifiedBy: admin
-                      id: 955
-                      code: shipment_normal_shipping
-                      name: Vận chuyển thường
-                      description: ''
-                      position: 1
-                      requires: []
-                      dependencies: []
-                      excludes: []
-                      serviceGroup:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: '2020-12-22T07:43:52.193Z'
-                        modifiedBy: admin
-                        id: 2
-                        code: shipping_group
-                        name: Dịch vụ chuyển phát
-                        description: ''
-                        position: null
-                        single: true
-                        required: true
-                        language:
-                          name:
-                            vi: Dịch vụ chuyển phát
-                          description:
-                            vi: ''
-                      shippingClass:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: '2020-11-30T09:34:21.745Z'
-                        modifiedBy: admin
-                        id: 1
-                        code: standard
-                        name: Chuyển phát thường
-                        description: null
-                        position: null
-                        calculatedByFormula: false
-                        preferredWarehouse: null
-                        language: null
-                      defaultApplied: true
-                      needApprove: false
-                      shipping: true
-                      approved: true
-                      serviceInfo: ''
-                      alias: null
-                      dimensionWeightConversion: 1
-                      requireGroups:
-                        - packaging_group
-                      excludeGroups: []
-                      onlyStaff: false
-                      language:
-                        name:
-                          vi: Vận chuyển thường
-                        description:
-                          vi: ''
-                        serviceInfo:
-                          vi: ''
-                    - createdAt: '2021-06-16T08:17:23.789Z'
-                      createdBy: admin
-                      modifiedAt: '2021-06-16T08:17:23.789Z'
-                      modifiedBy: admin
-                      id: 952
-                      code: shipment_standard_packaging
-                      name: Đóng gỗ chung
-                      description: ''
-                      position: 5
-                      requires: []
-                      dependencies: []
-                      excludes: []
-                      serviceGroup:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: '2020-12-22T07:43:52.193Z'
-                        modifiedBy: admin
-                        id: 1
-                        code: packaging_group
-                        name: Dịch vụ đóng hàng
-                        description: ''
-                        position: null
-                        single: true
-                        required: false
-                        language:
-                          name:
-                            vi: Dịch vụ đóng hàng
-                          description:
-                            vi: ''
-                      shippingClass: null
-                      defaultApplied: false
-                      needApprove: false
-                      shipping: false
-                      approved: true
-                      serviceInfo: ''
-                      alias: null
-                      dimensionWeightConversion: 1
-                      requireGroups: null
-                      excludeGroups: null
-                      onlyStaff: false
-                      language:
-                        name:
-                          vi: Đóng gỗ chung
-                        description:
-                          vi: ''
-                        serviceInfo:
-                          vi: ''
-                  image: null
-                  status: PUTAWAY
-                  code: N776_3781572
-                  remark: null
-                  note: null
-                  provisionalAmount: 5500
-                  totalFee: 18123
-                  totalCollect: null
-                  totalCoupon: null
-                  totalUnpaid: 18123
-                  timestamp: '2021-09-01T02:37:34.818Z'
-                  totalValue: null
-                  address:
-                    createdAt: '2021-09-01T02:37:35.669Z'
+                  value:
+                    createdAt: '2021-09-01T02:37:35.543Z'
                     createdBy: ngantk
-                    modifiedAt: '2021-09-01T02:37:35.669Z'
+                    modifiedAt: '2021-09-01T02:38:16.514Z'
                     modifiedBy: ngantk
-                    id: 4050
-                    fullname: Nguyễn Thu Huệ
-                    phone: '0968182636'
-                    address: Tòa viglacera
-                    location:
-                      createdAt: '2020-11-18T07:39:41.402115Z'
-                      createdBy: ducmami
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: '6910'
-                      code: '20293'
-                      name: Xã Hòa Bắc
-                      description: null
-                      display: 'Xã Hòa Bắc, Huyện Hòa Vang, Thành phố Đà Nẵng'
-                      position: 0
-                      type: WARD
-                      parent:
+                    customer:
+                      avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
+                      balance: 2229391385.94
+                      code: N776
+                      contactAddress: '76'
+                      customerAuthorities:
+                        importParcel: true
+                        printParcelStamp: true
+                        draftServicesEnable: false
+                      customerGroup: null
+                      customerLevel: null
+                      customerStatus: ACTIVE
+                      dob: '1997-11-18T00:00:00Z'
+                      email: nguyenthikimnga@gobiz.vn
+                      fullname: Nga Kim
+                      gender: female
+                      id: 5
+                      nickname: Nga Kim
+                      peerPaymentConfigGroupId: null
+                      phone: '0123456788'
+                      rewardPoint: null
+                      username: ngantk
+                      zaloId: '7722188066535117386'
+                    services:
+                      - createdAt: '2021-06-16T08:17:23.808Z'
+                        createdBy: admin
+                        modifiedAt: '2021-06-16T08:17:23.808Z'
+                        modifiedBy: admin
+                        id: 955
+                        code: shipment_normal_shipping
+                        name: Vận chuyển thường
+                        description: ''
+                        position: 1
+                        requires: []
+                        dependencies: []
+                        excludes: []
+                        serviceGroup:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: '2020-12-22T07:43:52.193Z'
+                          modifiedBy: admin
+                          id: 2
+                          code: shipping_group
+                          name: Dịch vụ chuyển phát
+                          description: ''
+                          position: null
+                          single: true
+                          required: true
+                          language:
+                            name:
+                              vi: Dịch vụ chuyển phát
+                            description:
+                              vi: ''
+                        shippingClass:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: '2020-11-30T09:34:21.745Z'
+                          modifiedBy: admin
+                          id: 1
+                          code: standard
+                          name: Chuyển phát thường
+                          description: null
+                          position: null
+                          calculatedByFormula: false
+                          preferredWarehouse: null
+                          language: null
+                        defaultApplied: true
+                        needApprove: false
+                        shipping: true
+                        approved: true
+                        serviceInfo: ''
+                        alias: null
+                        dimensionWeightConversion: 1
+                        requireGroups:
+                          - packaging_group
+                        excludeGroups: []
+                        onlyStaff: false
+                        language:
+                          name:
+                            vi: Vận chuyển thường
+                          description:
+                            vi: ''
+                          serviceInfo:
+                            vi: ''
+                      - createdAt: '2021-06-16T08:17:23.789Z'
+                        createdBy: admin
+                        modifiedAt: '2021-06-16T08:17:23.789Z'
+                        modifiedBy: admin
+                        id: 952
+                        code: shipment_standard_packaging
+                        name: Đóng gỗ chung
+                        description: ''
+                        position: 5
+                        requires: []
+                        dependencies: []
+                        excludes: []
+                        serviceGroup:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: '2020-12-22T07:43:52.193Z'
+                          modifiedBy: admin
+                          id: 1
+                          code: packaging_group
+                          name: Dịch vụ đóng hàng
+                          description: ''
+                          position: null
+                          single: true
+                          required: false
+                          language:
+                            name:
+                              vi: Dịch vụ đóng hàng
+                            description:
+                              vi: ''
+                        shippingClass: null
+                        defaultApplied: false
+                        needApprove: false
+                        shipping: false
+                        approved: true
+                        serviceInfo: ''
+                        alias: null
+                        dimensionWeightConversion: 1
+                        requireGroups: null
+                        excludeGroups: null
+                        onlyStaff: false
+                        language:
+                          name:
+                            vi: Đóng gỗ chung
+                          description:
+                            vi: ''
+                          serviceInfo:
+                            vi: ''
+                    image: null
+                    status: PUTAWAY
+                    code: N776_3781572
+                    remark: null
+                    note: null
+                    provisionalAmount: 5500
+                    totalFee: 18123
+                    totalCollect: null
+                    totalCoupon: null
+                    totalUnpaid: 18123
+                    timestamp: '2021-09-01T02:37:34.818Z'
+                    totalValue: null
+                    address:
+                      createdAt: '2021-09-01T02:37:35.669Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-09-01T02:37:35.669Z'
+                      modifiedBy: ngantk
+                      id: 4050
+                      fullname: Nguyễn Thu Huệ
+                      phone: '0968182636'
+                      address: Tòa viglacera
+                      location:
                         createdAt: '2020-11-18T07:39:41.402115Z'
                         createdBy: ducmami
                         modifiedAt: null
                         modifiedBy: null
-                        id: '426'
-                        code: '497'
-                        name: Huyện Hòa Vang
+                        id: '6910'
+                        code: '20293'
+                        name: Xã Hòa Bắc
                         description: null
-                        display: 'Huyện Hòa Vang, Thành phố Đà Nẵng'
+                        display: 'Xã Hòa Bắc, Huyện Hòa Vang, Thành phố Đà Nẵng'
                         position: 0
-                        type: DISTRICT
+                        type: WARD
                         parent:
                           createdAt: '2020-11-18T07:39:41.402115Z'
                           createdBy: ducmami
                           modifiedAt: null
                           modifiedBy: null
-                          id: '3'
-                          code: '48'
-                          name: Thành phố Đà Nẵng
+                          id: '426'
+                          code: '497'
+                          name: Huyện Hòa Vang
                           description: null
-                          display: Thành phố Đà Nẵng
+                          display: 'Huyện Hòa Vang, Thành phố Đà Nẵng'
                           position: 0
-                          type: PROVINCE
-                          parent: null
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '3'
+                            code: '48'
+                            name: Thành phố Đà Nẵng
+                            description: null
+                            display: Thành phố Đà Nẵng
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
                           language: null
                         language: null
-                      language: null
-                    note: ''
-                    hash: 7BEF865417AD2465C43033F5C18D38D7
-                  exchangeRate: 3500
-                  actualWeight: 0.2
-                  volumetric: 0
-                  merchantName: null
-                  merchantUrl: null
-                  declareValue: null
-                  totalPaid: null
-                  totalRefund: null
-                  totalClaim: null
-                  deliveryNotice: false
-                  configGroupId: 2cc72d0a-be58-492b-8228-e44c81cf26a9
-                  waybills: []
-                  products: []
-                  receivingWarehouse:
-                    createdAt: '2020-12-14T08:13:40.003Z'
-                    createdBy: admin
-                    modifiedAt: '2020-12-14T08:13:40.003Z'
-                    modifiedBy: admin
-                    id: 29
-                    code: O-HN
-                    name: O-HN
-                    description: Kho này được tạo ra bởi ngantk
-                    position: 22
-                    location:
-                      createdAt: '2020-11-18T07:39:41.402115Z'
-                      createdBy: ducmami
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: '3296'
-                      code: '09538'
-                      name: Phường Nguyễn Trãi
-                      description: null
-                      display: 'Phường Nguyễn Trãi, Quận Hà Đông, Thành phố Hà Nội'
-                      position: 0
-                      type: WARD
-                      parent:
+                      note: ''
+                      hash: 7BEF865417AD2465C43033F5C18D38D7
+                    exchangeRate: 3500
+                    actualWeight: 0.2
+                    volumetric: 0
+                    merchantName: null
+                    merchantUrl: null
+                    declareValue: null
+                    totalPaid: null
+                    totalRefund: null
+                    totalClaim: null
+                    deliveryNotice: false
+                    configGroupId: 2cc72d0a-be58-492b-8228-e44c81cf26a9
+                    waybills: []
+                    products: []
+                    receivingWarehouse:
+                      createdAt: '2020-12-14T08:13:40.003Z'
+                      createdBy: admin
+                      modifiedAt: '2020-12-14T08:13:40.003Z'
+                      modifiedBy: admin
+                      id: 29
+                      code: O-HN
+                      name: O-HN
+                      description: Kho này được tạo ra bởi ngantk
+                      position: 22
+                      location:
                         createdAt: '2020-11-18T07:39:41.402115Z'
                         createdBy: ducmami
                         modifiedAt: null
                         modifiedBy: null
-                        id: '201'
-                        code: '268'
-                        name: Quận Hà Đông
+                        id: '3296'
+                        code: '09538'
+                        name: Phường Nguyễn Trãi
                         description: null
-                        display: 'Quận Hà Đông, Thành phố Hà Nội'
+                        display: 'Phường Nguyễn Trãi, Quận Hà Đông, Thành phố Hà Nội'
                         position: 0
-                        type: DISTRICT
+                        type: WARD
                         parent:
                           createdAt: '2020-11-18T07:39:41.402115Z'
                           createdBy: ducmami
                           modifiedAt: null
                           modifiedBy: null
-                          id: '35'
-                          code: '01'
-                          name: Thành phố Hà Nội
+                          id: '201'
+                          code: '268'
+                          name: Quận Hà Đông
                           description: null
-                          display: Thành phố Hà Nội
+                          display: 'Quận Hà Đông, Thành phố Hà Nội'
                           position: 0
-                          type: PROVINCE
-                          parent: null
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '35'
+                            code: '01'
+                            name: Thành phố Hà Nội
+                            description: null
+                            display: Thành phố Hà Nội
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
                           language: null
                         language: null
-                      language: null
-                    enabled: true
-                    delivered: true
-                    received: true
-                    address: null
-                    recipientName: null
-                    recipientAddress: null
-                    recipientPhone: null
-                  currency: CNY
-                  hsCode: null
-                  originalReceipts: []
-                  existsProduct: false
-                  refShipmentCode: null
-                  refCustomerCode: null
-                  totalProducts: null
-                  expectedPackages: null
-                  actualPackages: null
+                      enabled: true
+                      delivered: true
+                      received: true
+                      address: null
+                      recipientName: null
+                      recipientAddress: null
+                      recipientPhone: null
+                    currency: CNY
+                    hsCode: null
+                    originalReceipts: []
+                    existsProduct: false
+                    refShipmentCode: null
+                    refCustomerCode: null
+                    totalProducts: null
+                    expectedPackages: null
+                    actualPackages: null
         '404':
           description: Not Found
           content:
@@ -1314,20 +1540,16 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: shipment_not_found
-                  status: 404
-                  detail: Can not found shipment with code $code
+                  value:
+                    title: shipment_not_found
+                    status: 404
+                    detail: Can not found shipment with code $code
       description: Cập nhật đơn ký gửi
       parameters:
         - schema:
             type: string
           in: header
           name: Content-Type
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Authorization
           required: true
       requestBody:
         content:
@@ -1362,77 +1584,79 @@ paths:
                   $ref: '#/components/schemas/Category-Shipment-Service'
               examples:
                 example-1:
-                  - createdAt: '2021-06-16T08:17:23.781Z'
-                    createdBy: admin
-                    modifiedAt: '2021-06-16T08:17:23.781Z'
-                    modifiedBy: admin
-                    id: 950
-                    code: shipment_inspection
-                    name: Kiểm hàng
-                    description: ''
-                    position: 0
-                    requires: []
-                    dependencies: []
-                    excludes: []
-                    serviceGroup: null
-                    shippingClass: null
-                    defaultApplied: true
-                    needApprove: false
-                    shipping: false
-                    approved: null
-                    serviceInfo: ''
-                    alias: null
-                    dimensionWeightConversion: 1
-                    requireGroups: null
-                    excludeGroups: null
-                    onlyStaff: false
-                    language:
-                      name:
-                        vi: Kiểm hàng
-                      description:
-                        vi: ''
-                      serviceInfo:
-                        vi: ''
-                  - createdAt: '2021-06-16T08:17:23.785Z'
-                    createdBy: admin
-                    modifiedAt: '2021-06-16T08:17:23.785Z'
-                    modifiedBy: admin
-                    id: 951
-                    code: shipment_split_packaging
-                    name: Tách kiện
-                    description: ''
-                    position: 0
-                    requires: []
-                    dependencies: []
-                    excludes: []
-                    serviceGroup: null
-                    shippingClass: null
-                    defaultApplied: false
-                    needApprove: false
-                    shipping: false
-                    approved: null
-                    serviceInfo: Đây là info Việt Nam nè
-                    alias: null
-                    dimensionWeightConversion: 1
-                    requireGroups: null
-                    excludeGroups: null
-                    onlyStaff: false
-                    language:
-                      name:
-                        en: Split the bale
-                        km: ពុះ bale នេះ
-                        vi: Tách kiện
-                      description:
-                        en: ''
-                        km: ''
-                        vi: ''
-                      serviceInfo:
-                        en: info info Tiếng anh nè
-                        km: ព័ត៌មានជាភាសាវៀតណាម
-                        vi: Đây là info Việt Nam nè
+                  value:
+                    - createdAt: '2021-06-16T08:17:23.781Z'
+                      createdBy: admin
+                      modifiedAt: '2021-06-16T08:17:23.781Z'
+                      modifiedBy: admin
+                      id: 950
+                      code: shipment_inspection
+                      name: Kiểm hàng
+                      description: ''
+                      position: 0
+                      requires: []
+                      dependencies: []
+                      excludes: []
+                      serviceGroup: null
+                      shippingClass: null
+                      defaultApplied: true
+                      needApprove: false
+                      shipping: false
+                      approved: null
+                      serviceInfo: ''
+                      alias: null
+                      dimensionWeightConversion: 1
+                      requireGroups: null
+                      excludeGroups: null
+                      onlyStaff: false
+                      language:
+                        name:
+                          vi: Kiểm hàng
+                        description:
+                          vi: ''
+                        serviceInfo:
+                          vi: ''
+                    - createdAt: '2021-06-16T08:17:23.785Z'
+                      createdBy: admin
+                      modifiedAt: '2021-06-16T08:17:23.785Z'
+                      modifiedBy: admin
+                      id: 951
+                      code: shipment_split_packaging
+                      name: Tách kiện
+                      description: ''
+                      position: 0
+                      requires: []
+                      dependencies: []
+                      excludes: []
+                      serviceGroup: null
+                      shippingClass: null
+                      defaultApplied: false
+                      needApprove: false
+                      shipping: false
+                      approved: null
+                      serviceInfo: Đây là info Việt Nam nè
+                      alias: null
+                      dimensionWeightConversion: 1
+                      requireGroups: null
+                      excludeGroups: null
+                      onlyStaff: false
+                      language:
+                        name:
+                          en: Split the bale
+                          km: ពុះ bale នេះ
+                          vi: Tách kiện
+                        description:
+                          en: ''
+                          km: ''
+                          vi: ''
+                        serviceInfo:
+                          en: info info Tiếng anh nè
+                          km: ព័ត៌មានជាភាសាវៀតណាម
+                          vi: Đây là info Việt Nam nè
       operationId: get-api-categories-shipment_services
       parameters: []
       description: Thông tin các các dịch vụ của đơn ký gửi
+      security: []
   /api/customer/profile:
     get:
       summary: Get Customer Profile
@@ -1447,164 +1671,68 @@ paths:
                 $ref: '#/components/schemas/Customer'
               examples:
                 example-1:
-                  avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
-                  balance: null
-                  code: N776
-                  contactAddress: '76'
-                  customerAuthorities:
-                    importParcel: true
-                    printParcelStamp: true
-                    draftServicesEnable: false
-                  customerGroup:
-                    id: 40
-                    tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                    code: haha
-                    name: haha
-                    description: null
-                    configGroup: null
-                    createdBy:
-                      avatar: //www.gravatar.com/avatar/EC2BADA21521263B2F7086981C17CE03?d=retro&s=256&r=g
-                      email: maiminhduc@gobiz.vn
-                      fullname: Admin
-                      id: 6
-                      nickname: ''
-                      phone: '09876543210'
-                      staff: false
-                      username: admin
-                    modifiedBy:
-                      avatar: //www.gravatar.com/avatar/EC2BADA21521263B2F7086981C17CE03?d=retro&s=256&r=g
-                      email: maiminhduc@gobiz.vn
-                      fullname: Admin
-                      id: 6
-                      nickname: ''
-                      phone: '09876543210'
-                      staff: false
-                      username: admin
-                    createdAt: '2020-12-23T02:37:19.958Z'
-                    modifiedAt: '2020-12-23T02:37:19.958Z'
-                    emdPercent: null
-                    categoryConfigGroups: null
-                  customerLevel:
-                    createdAt: '2021-09-07T02:59:07.551Z'
-                    createdBy: admin
-                    modifiedAt: '2021-09-07T02:59:07.551Z'
-                    modifiedBy: admin
-                    id: b2864a9c-ae62-4e95-b4cb-a58ac2d0c17a
-                    name: VIP 8
-                    minPoint: 9000
-                    maxPoint: 2147492647
-                    imageUrl: null
-                  customerStatus: ACTIVE
-                  dob: '1997-11-18T00:00:00Z'
-                  email: nguyenthikimnga@gobiz.vn
-                  fullname: Nga Kim
-                  gender: female
-                  id: 5
-                  nickname: Nga Kim
-                  peerPaymentConfigGroupId: 02494e18-dcc9-421f-ba9e-b30d5925d151
-                  phone: '0123456788'
-                  rewardPoint: 2141705.7414
-                  username: ngantk
-                  zaloId: '7722188066535117386'
+                  value:
+                    avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
+                    balance: null
+                    code: N776
+                    contactAddress: '76'
+                    customerAuthorities:
+                      importParcel: true
+                      printParcelStamp: true
+                      draftServicesEnable: false
+                    customerGroup:
+                      id: 40
+                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
+                      code: haha
+                      name: haha
+                      description: null
+                      configGroup: null
+                      createdBy:
+                        avatar: //www.gravatar.com/avatar/EC2BADA21521263B2F7086981C17CE03?d=retro&s=256&r=g
+                        email: maiminhduc@gobiz.vn
+                        fullname: Admin
+                        id: 6
+                        nickname: ''
+                        phone: '09876543210'
+                        staff: false
+                        username: admin
+                      modifiedBy:
+                        avatar: //www.gravatar.com/avatar/EC2BADA21521263B2F7086981C17CE03?d=retro&s=256&r=g
+                        email: maiminhduc@gobiz.vn
+                        fullname: Admin
+                        id: 6
+                        nickname: ''
+                        phone: '09876543210'
+                        staff: false
+                        username: admin
+                      createdAt: '2020-12-23T02:37:19.958Z'
+                      modifiedAt: '2020-12-23T02:37:19.958Z'
+                      emdPercent: null
+                      categoryConfigGroups: null
+                    customerLevel:
+                      createdAt: '2021-09-07T02:59:07.551Z'
+                      createdBy: admin
+                      modifiedAt: '2021-09-07T02:59:07.551Z'
+                      modifiedBy: admin
+                      id: b2864a9c-ae62-4e95-b4cb-a58ac2d0c17a
+                      name: VIP 8
+                      minPoint: 9000
+                      maxPoint: 2147492647
+                      imageUrl: null
+                    customerStatus: ACTIVE
+                    dob: '1997-11-18T00:00:00Z'
+                    email: nguyenthikimnga@gobiz.vn
+                    fullname: Nga Kim
+                    gender: female
+                    id: 5
+                    nickname: Nga Kim
+                    peerPaymentConfigGroupId: 02494e18-dcc9-421f-ba9e-b30d5925d151
+                    phone: '0123456788'
+                    rewardPoint: 2141705.7414
+                    username: ngantk
+                    zaloId: '7722188066535117386'
       operationId: get-api-customer-profile
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-  /api/customer/cart:
-    post:
-      summary: Add item to cart
-      operationId: post-api-customer-cart
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Cart-Merchant'
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                originalId:
-                  type: string
-                name:
-                  type: string
-                originalName:
-                  type: string
-                image:
-                  type: string
-                url:
-                  type: string
-                variantProperties:
-                  $ref: '#/components/schemas/Variant-Properties'
-                variantImage:
-                  type: string
-                stock:
-                  type: integer
-                quantity:
-                  type: integer
-                originalPrice:
-                  type: number
-                salePrice:
-                  type: number
-                currency:
-                  type: string
-                batchSize:
-                  type: integer
-                minQuantity:
-                  type: integer
-                pricePolicy:
-                  $ref: '#/components/schemas/Price-Policy'
-                skuId:
-                  type: string
-                specId:
-                  type: string
-                merchant:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    name:
-                      type: string
-                    marketplace:
-                      type: string
-                    url:
-                      type: string
-                    contacts:
-                      type: array
-                      items:
-                        type: object
-                  required:
-                    - id
-                    - name
-                    - marketplace
-              required:
-                - originalId
-                - originalPrice
-                - salePrice
-      tags:
-        - Order
+      parameters: []
   /oauth/token:
     post:
       summary: Get token / Login
@@ -1662,6 +1790,7 @@ paths:
       description: API lấy token
       tags:
         - Customer
+      security: []
   '/api/customer/shipments/{code}/waybill':
     parameters:
       - schema:
@@ -1705,17 +1834,7 @@ paths:
                     status: 400
                     detail: Can not found shipment with code '$code'
       operationId: get-api-customer-shipments-code-waybill
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       description: Danh sách mã vận đơn trong đơn ký gửi
     post:
       summary: Add waybill in a shipment
@@ -1789,11 +1908,6 @@ paths:
           in: header
           required: true
           name: Content-Type
-        - schema:
-            type: string
-          in: header
-          required: true
-          name: Authorization
       description: Thêm mới mã vận đơn trong đơn ký gửi
       tags:
         - Shipment
@@ -1813,8 +1927,8 @@ paths:
       summary: Delete waybill in a shipment
       operationId: delete-api-customer-shipments-code-waybill-waybillCode
       responses:
-        '200':
-          description: OK
+        '204':
+          description: No Content
         '400':
           description: Bad request
           content:
@@ -1835,19 +1949,15 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 shipment_not_found:
-                  title: shipment_not_found
-                  status: 404
-                  detail: Can not found shipment with code '$code'
+                  value:
+                    title: shipment_not_found
+                    status: 404
+                    detail: Can not found shipment with code '$code'
                 waybill_code_not_found:
                   title: shipment_not_found
                   status: 404
                   detail: Could not found waybill with code '$waybillCode'
       parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
         - schema:
             type: string
           in: header
@@ -1866,90 +1976,58 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer-Waybill'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer-Waybill'
               examples:
                 example-1:
-                  createdAt: '2021-03-19T08:03:02.060Z'
-                  createdBy: ngantk
-                  modifiedAt: '2021-03-19T08:03:11.868Z'
-                  modifiedBy: ngantk
-                  id: 021d360f-b473-44a2-95d4-bef0ff4d6972
-                  customerId: 5
-                  shipmentCode: N776_3219171
-                  code: Q3456YWT5Y436356
-                  description: null
-                  courierCompany: null
-                  status: MATCHED_TO_SHIPMENT
-                  receivingWarehouse:
-                    createdAt: '2020-11-19T04:37:17.080Z'
-                    createdBy: admin
-                    modifiedAt: '2021-05-17T08:00:52.412Z'
-                    modifiedBy: admin
-                    id: 18
-                    code: CNGZ
-                    name: CNGZ
-                    description: Kho này được tạo ra bởi ngantk
-                    position: 22
-                    location:
-                      createdAt: '2020-11-18T07:39:41.402115Z'
-                      createdBy: ducmami
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: '141'
-                      code: '187'
-                      name: Huyện Chi Lăng
-                      description: null
-                      display: 'Huyện Chi Lăng, Tỉnh Lạng Sơn'
-                      position: 0
-                      type: DISTRICT
-                      parent:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: null
-                        modifiedBy: null
-                        id: '5'
-                        code: '20'
-                        name: Tỉnh Lạng Sơn
-                        description: null
-                        display: Tỉnh Lạng Sơn
-                        position: 0
-                        type: PROVINCE
-                        parent: null
-                        language: null
-                      language: null
-                    enabled: true
-                    delivered: true
-                    received: true
-                    address: |-
-                      收货地址：广东省，广州市，白云区，均禾街道，石马村旺发大街92号C栋SCB仓库 [[username]] [[order_code]]
-                      邮政编码：510440
-                      电话号码：13148959544
-                      收货人： SCB-[[order_code]]
-                    recipientName: 'SCB-[[order_code]]'
-                    recipientAddress: '平沙路5号X单元C门 TESTBG 仓库 [[username]] [[order_code]]'
-                    recipientPhone: '13148959544'
-                  receivedTime: '2021-03-19T08:03:11.862Z'
+                  value:
+                    - createdAt: '2021-09-17T09:57:50.416Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-09-17T09:57:50.416Z'
+                      modifiedBy: ngantk
+                      id: d2c970c7-2111-4a7d-9c56-13dd2d715f69
+                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
+                      customerId: 5
+                      shipmentCode: null
+                      code: '123123'
+                      description: test
+                      courierCompany: null
+                      status: INITIALIZATION
+                      receivingWarehouse: null
+                      receivedTime: null
+                    - createdAt: '2021-09-17T09:57:50.428Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-09-17T09:57:50.428Z'
+                      modifiedBy: ngantk
+                      id: 939400e7-0fea-4981-bdfd-f187b3b32959
+                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
+                      customerId: 5
+                      shipmentCode: null
+                      code: '123456'
+                      description: test
+                      courierCompany: null
+                      status: INITIALIZATION
+                      receivingWarehouse: null
+                      receivedTime: null
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: ./poseidon.v1.yml#/components/schemas/Error-Response
+                $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  too_much_waybill: string
-                  status: 400
-                  detail: 'There is too much waybill number, please try again'
+                  value:
+                    title: too_much_waybill
+                    status: 400
+                    detail: 'There is too much waybill number, please try again'
                 example-2:
-                  title: default_address_not_found
-                  status: 400
-                  detail: You should create a default address
+                  value:
+                    title: default_address_not_found
+                    status: 400
+                    detail: You should create a default address
       parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
         - schema:
             type: string
           in: header
@@ -1994,7 +2072,115 @@ paths:
                   $ref: '#/components/schemas/Customer-Waybill'
               examples:
                 example-1:
-                  - createdAt: '2021-03-19T08:03:02.060Z'
+                  value:
+                    - createdAt: '2021-03-19T08:03:02.060Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-03-19T08:03:11.868Z'
+                      modifiedBy: ngantk
+                      id: 021d360f-b473-44a2-95d4-bef0ff4d6972
+                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
+                      customerId: 5
+                      shipmentCode: N776_3219171
+                      code: Q3456YWT5Y436356
+                      description: null
+                      courierCompany: null
+                      status: MATCHED_TO_SHIPMENT
+                      receivingWarehouse:
+                        createdAt: '2020-11-19T04:37:17.080Z'
+                        createdBy: admin
+                        modifiedAt: '2021-05-17T08:00:52.412Z'
+                        modifiedBy: admin
+                        id: 18
+                        code: CNGZ
+                        name: CNGZ
+                        description: Kho này được tạo ra bởi ngantk
+                        position: 22
+                        location:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: null
+                          modifiedBy: null
+                          id: '141'
+                          code: '187'
+                          name: Huyện Chi Lăng
+                          description: null
+                          display: 'Huyện Chi Lăng, Tỉnh Lạng Sơn'
+                          position: 0
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '5'
+                            code: '20'
+                            name: Tỉnh Lạng Sơn
+                            description: null
+                            display: Tỉnh Lạng Sơn
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
+                          language: null
+                        enabled: true
+                        delivered: true
+                        received: true
+                        address: |-
+                          收货地址：广东省，广州市，白云区，均禾街道，石马村旺发大街92号C栋SCB仓库 [[username]] [[order_code]]
+                          邮政编码：510440
+                          电话号码：13148959544
+                          收货人： SCB-[[order_code]]
+                        recipientName: 'SCB-[[order_code]]'
+                        recipientAddress: '平沙路5号X单元C门 TESTBG 仓库 [[username]] [[order_code]]'
+                        recipientPhone: '13148959544'
+                      receivedTime: '2021-03-19T08:03:11.862Z'
+      parameters:
+        - schema:
+            type: array
+          in: query
+          name: statuses
+          style: pipeDelimited
+        - schema:
+            type: string
+          in: query
+          name: receivedTimeFrom
+        - schema:
+            type: string
+          in: query
+          name: receivedTimeTo
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: createdTimeFrom
+        - schema:
+            type: string
+          in: query
+          name: createdTimeTo
+      description: Danh sách mã vận đơn của khách hàng
+      tags:
+        - Customer-Waybill
+  '/api/customer/customer_waybills/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: Update a customer waybill
+      operationId: patch-api-customer-customer_waybills-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer-Waybill'
+              examples:
+                example-1:
+                  value:
+                    createdAt: '2021-03-19T08:03:02.060Z'
                     createdBy: ngantk
                     modifiedAt: '2021-03-19T08:03:11.868Z'
                     modifiedBy: ngantk
@@ -2059,127 +2245,6 @@ paths:
         - schema:
             type: string
           in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-        - schema:
-            type: array
-          in: query
-          name: statuses
-          style: pipeDelimited
-        - schema:
-            type: string
-          in: query
-          name: receivedTimeFrom
-        - schema:
-            type: string
-          in: query
-          name: receivedTimeTo
-        - schema:
-            type: string
-            format: date-time
-          in: query
-          name: createdTimeFrom
-        - schema:
-            type: string
-          in: query
-          name: createdTimeTo
-      description: Danh sách mã vận đơn của khách hàng
-      tags:
-        - Customer-Waybill
-  '/api/customer/customer_waybills/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    patch:
-      summary: Update a customer waybill
-      operationId: patch-api-customer-customer_waybills-id
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer-Waybill'
-              examples:
-                example-1:
-                  createdAt: '2021-03-19T08:03:02.060Z'
-                  createdBy: ngantk
-                  modifiedAt: '2021-03-19T08:03:11.868Z'
-                  modifiedBy: ngantk
-                  id: 021d360f-b473-44a2-95d4-bef0ff4d6972
-                  tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                  customerId: 5
-                  shipmentCode: N776_3219171
-                  code: Q3456YWT5Y436356
-                  description: null
-                  courierCompany: null
-                  status: MATCHED_TO_SHIPMENT
-                  receivingWarehouse:
-                    createdAt: '2020-11-19T04:37:17.080Z'
-                    createdBy: admin
-                    modifiedAt: '2021-05-17T08:00:52.412Z'
-                    modifiedBy: admin
-                    id: 18
-                    code: CNGZ
-                    name: CNGZ
-                    description: Kho này được tạo ra bởi ngantk
-                    position: 22
-                    location:
-                      createdAt: '2020-11-18T07:39:41.402115Z'
-                      createdBy: ducmami
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: '141'
-                      code: '187'
-                      name: Huyện Chi Lăng
-                      description: null
-                      display: 'Huyện Chi Lăng, Tỉnh Lạng Sơn'
-                      position: 0
-                      type: DISTRICT
-                      parent:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: ducmami
-                        modifiedAt: null
-                        modifiedBy: null
-                        id: '5'
-                        code: '20'
-                        name: Tỉnh Lạng Sơn
-                        description: null
-                        display: Tỉnh Lạng Sơn
-                        position: 0
-                        type: PROVINCE
-                        parent: null
-                        language: null
-                      language: null
-                    enabled: true
-                    delivered: true
-                    received: true
-                    address: |-
-                      收货地址：广东省，广州市，白云区，均禾街道，石马村旺发大街92号C栋SCB仓库 [[username]] [[order_code]]
-                      邮政编码：510440
-                      电话号码：13148959544
-                      收货人： SCB-[[order_code]]
-                    recipientName: 'SCB-[[order_code]]'
-                    recipientAddress: '平沙路5号X单元C门 TESTBG 仓库 [[username]] [[order_code]]'
-                    recipientPhone: '13148959544'
-                  receivedTime: '2021-03-19T08:03:11.862Z'
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
           name: Content-Type
           required: true
       requestBody:
@@ -2216,15 +2281,11 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: customer_waybill_not_found
-                  status: 404
-                  detail: Customer waybill with code $code does not exist
+                  value:
+                    title: customer_waybill_not_found
+                    status: 404
+                    detail: Customer waybill with code $code does not exist
       parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
         - schema:
             type: string
           in: header
@@ -2238,10 +2299,42 @@ paths:
       summary: Get list harmonized commodity
       tags:
         - Category
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category-Harmonized-Commodity'
+              examples:
+                example-1:
+                  value:
+                    - createdAt: null
+                      createdBy: null
+                      modifiedAt: null
+                      modifiedBy: null
+                      id: 6
+                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
+                      code: game
+                      name: Đồ chơi
+                      description: null
+                      priority: 0
+                    - createdAt: null
+                      createdBy: null
+                      modifiedAt: null
+                      modifiedBy: null
+                      id: 7
+                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
+                      code: electronics
+                      name: Đồ điện tử
+                      description: null
+                      priority: 0
       operationId: get-api-categories-harmonized_commodity
       description: Danh sách các nhóm ngành hàng
       parameters: []
+      security: []
   '/api/customer/shipments/{code}/products':
     parameters:
       - schema:
@@ -2264,7 +2357,76 @@ paths:
                   $ref: '#/components/schemas/Customer-Shipment-Product'
               examples:
                 example-1:
-                  - createdAt: '2021-07-20T03:21:36.940Z'
+                  value:
+                    - createdAt: '2021-07-20T03:21:36.940Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-07-20T03:21:36.940Z'
+                      modifiedBy: ngantk
+                      id: 86af47f9-12b9-439d-a40a-453751f72321
+                      code: P0009Q
+                      originalId: null
+                      originalName: 2021款透气飞织椰子鞋350V2男女同款情侣鞋品质男鞋套帮女运动鞋
+                      name: 2021款透气飞织椰子鞋350V2男女同款情侣鞋品质男鞋套帮女运动鞋
+                      shortName: null
+                      shortTranslatedName: null
+                      translatedName: null
+                      productUrl: 'https://detail.1688.com/offer/642382221053.html'
+                      productImage: 'https://cbu01.alicdn.com/img/ibank/O1CN01QxcPUS1qBoOuZzv9L_!!2415305458-0-cib.summ.jpg '
+                      merchantName: 瑞安市宣品鞋行
+                      merchantContact: null
+                      quantity: 2
+                      receivedQuantity: null
+                      unitPrice: 26.5
+                      remark: null
+                      note: null
+                      staffRemark: null
+                      skuHash: null
+                      skuId: null
+                      hsCode: null
+                      timestamp: '2021-07-20T03:21:26.598Z'
+                      unit: null
+                      translatedUnit: null
+                      exchangedActualPrice: 92750
+                      variantProperties:
+                        - id: 510a871f-2ab0-416a-900c-dd96c79c7508
+                          originalName: 尺码
+                          name: 尺码
+                          originalValue: '39'
+                          value: '39'
+                        - id: 2151faaf-c67c-4593-b3df-6a1aeb76534a
+                          originalName: 颜色
+                          name: 颜色
+                          originalValue: 绿色
+                          value: 绿色
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-Response'
+              examples:
+                example-1:
+                  value:
+                    title: shipment_not_found
+                    status: 404
+                    detail: Can not find shipment with code '$shipmentCode'
+      operationId: get-api-customer-shipments-code-products
+      description: Danh sách các sản phẩm của đơn ký gửi
+      parameters: []
+    post:
+      summary: Create a product in a shipment
+      operationId: post-api-customer-shipments-code-products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer-Shipment-Product'
+              examples:
+                example-1:
+                  value:
+                    createdAt: '2021-07-20T03:21:36.940Z'
                     createdBy: ngantk
                     modifiedAt: '2021-07-20T03:21:36.940Z'
                     modifiedBy: ngantk
@@ -2304,77 +2466,6 @@ paths:
                         name: 颜色
                         originalValue: 绿色
                         value: 绿色
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-Response'
-              examples:
-                example-1:
-                  title: shipment_not_found
-                  status: 404
-                  detail: Can not find shipment with code '$shipmentCode'
-      operationId: get-api-customer-shipments-code-products
-      description: Danh sách các sản phẩm của đơn ký gửi
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
-    post:
-      summary: Create a product in a shipment
-      operationId: post-api-customer-shipments-code-products
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer-Shipment-Product'
-              examples:
-                example-1:
-                  createdAt: '2021-07-20T03:21:36.940Z'
-                  createdBy: ngantk
-                  modifiedAt: '2021-07-20T03:21:36.940Z'
-                  modifiedBy: ngantk
-                  id: 86af47f9-12b9-439d-a40a-453751f72321
-                  code: P0009Q
-                  originalId: null
-                  originalName: 2021款透气飞织椰子鞋350V2男女同款情侣鞋品质男鞋套帮女运动鞋
-                  name: 2021款透气飞织椰子鞋350V2男女同款情侣鞋品质男鞋套帮女运动鞋
-                  shortName: null
-                  shortTranslatedName: null
-                  translatedName: null
-                  productUrl: 'https://detail.1688.com/offer/642382221053.html'
-                  productImage: 'https://cbu01.alicdn.com/img/ibank/O1CN01QxcPUS1qBoOuZzv9L_!!2415305458-0-cib.summ.jpg '
-                  merchantName: 瑞安市宣品鞋行
-                  merchantContact: null
-                  quantity: 2
-                  receivedQuantity: null
-                  unitPrice: 26.5
-                  remark: null
-                  note: null
-                  staffRemark: null
-                  skuHash: null
-                  skuId: null
-                  hsCode: null
-                  timestamp: '2021-07-20T03:21:26.598Z'
-                  unit: null
-                  translatedUnit: null
-                  exchangedActualPrice: 92750
-                  variantProperties:
-                    - id: 510a871f-2ab0-416a-900c-dd96c79c7508
-                      originalName: 尺码
-                      name: 尺码
-                      originalValue: '39'
-                      value: '39'
-                    - id: 2151faaf-c67c-4593-b3df-6a1aeb76534a
-                      originalName: 颜色
-                      name: 颜色
-                      originalValue: 绿色
-                      value: 绿色
         '400':
           description: Bad Request
           content:
@@ -2383,9 +2474,10 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: action_do_not_allow
-                  status: 400
-                  detail: Can not add product with shipment status '$shipment.status'
+                  value:
+                    title: action_do_not_allow
+                    status: 400
+                    detail: Can not add product with shipment status '$shipment.status'
         '404':
           description: Not Found
           content:
@@ -2394,15 +2486,11 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: shipment_not_found
-                  status: 404
-                  detail: Can not find shipment with code '$shipmentCode'
+                  value:
+                    title: shipment_not_found
+                    status: 404
+                    detail: Can not find shipment with code '$shipmentCode'
       parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
         - schema:
             type: string
           in: header
@@ -2490,6 +2578,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer-Shipment-Product'
+              examples:
+                example-1:
+                  value:
+                    createdAt: '2021-07-20T03:21:36.940Z'
+                    createdBy: ngantk
+                    modifiedAt: '2021-07-20T03:21:36.940Z'
+                    modifiedBy: ngantk
+                    id: 86af47f9-12b9-439d-a40a-453751f72321
+                    code: P0009Q
+                    originalId: null
+                    originalName: 2021款透气飞织椰子鞋350V2男女同款情侣鞋品质男鞋套帮女运动鞋
+                    name: 2021款透气飞织椰子鞋350V2男女同款情侣鞋品质男鞋套帮女运动鞋
+                    shortName: null
+                    shortTranslatedName: null
+                    translatedName: null
+                    productUrl: 'https://detail.1688.com/offer/642382221053.html'
+                    productImage: 'https://cbu01.alicdn.com/img/ibank/O1CN01QxcPUS1qBoOuZzv9L_!!2415305458-0-cib.summ.jpg '
+                    merchantName: 瑞安市宣品鞋行
+                    merchantContact: null
+                    quantity: 2
+                    receivedQuantity: null
+                    unitPrice: 26.5
+                    remark: null
+                    note: null
+                    staffRemark: null
+                    skuHash: null
+                    skuId: null
+                    hsCode: null
+                    timestamp: '2021-07-20T03:21:26.598Z'
+                    unit: null
+                    translatedUnit: null
+                    exchangedActualPrice: 92750
+                    variantProperties:
+                      - id: 510a871f-2ab0-416a-900c-dd96c79c7508
+                        originalName: 尺码
+                        name: 尺码
+                        originalValue: '39'
+                        value: '39'
+                      - id: 2151faaf-c67c-4593-b3df-6a1aeb76534a
+                        originalName: 颜色
+                        name: 颜色
+                        originalValue: 绿色
+                        value: 绿色
         '400':
           description: Bad Request
           content:
@@ -2498,9 +2629,10 @@ paths:
                 $ref: '#/components/schemas/Error-Response'
               examples:
                 example-1:
-                  title: action_do_not_allow
-                  status: 400
-                  detail: Can not add product with shipment status '$shipment.status'
+                  value:
+                    title: action_do_not_allow
+                    status: 400
+                    detail: Can not add product with shipment status '$shipment.status'
         '404':
           description: Not Found
           content:
@@ -2513,9 +2645,10 @@ paths:
                   status: 404
                   detail: Can not found shipment with code '$code'
                 example-2:
-                  title: shipment_product_not_found
-                  status: 404
-                  detail: Product with code '$productCode' does not exists
+                  value:
+                    title: shipment_product_not_found
+                    status: 404
+                    detail: Product with code '$productCode' does not exists
       description: Cập nhật sản phẩm trên đơn ký gửi
       requestBody:
         content:
@@ -2541,11 +2674,6 @@ paths:
         - schema:
             type: string
           in: header
-          name: Authorization
-          required: true
-        - schema:
-            type: string
-          in: header
           name: Content-Type
           required: true
       tags:
@@ -2564,21 +2692,119 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer-Address'
+              examples:
+                example-1:
+                  value:
+                    - createdAt: '2021-06-22T07:53:51.661Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-06-22T07:53:51.661Z'
+                      modifiedBy: ngantk
+                      id: 306
+                      phone: '0968182636'
+                      detail: Tòa viglacera
+                      location:
+                        createdAt: '2020-11-18T07:39:41.402115Z'
+                        createdBy: ducmami
+                        modifiedAt: null
+                        modifiedBy: null
+                        id: '6910'
+                        code: '20293'
+                        name: Xã Hòa Bắc
+                        description: null
+                        display: 'Xã Hòa Bắc, Huyện Hòa Vang, Thành phố Đà Nẵng'
+                        position: 0
+                        type: WARD
+                        parent:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: null
+                          modifiedBy: null
+                          id: '426'
+                          code: '497'
+                          name: Huyện Hòa Vang
+                          description: null
+                          display: 'Huyện Hòa Vang, Thành phố Đà Nẵng'
+                          position: 0
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '3'
+                            code: '48'
+                            name: Thành phố Đà Nẵng
+                            description: null
+                            display: Thành phố Đà Nẵng
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
+                          language: null
+                        language: null
+                      note: ''
+                      defaultAddress: true
+                      fullname: Nguyễn Thu Huệ
+                      addressName: Hueng tesstttt
+                    - createdAt: '2021-06-02T03:11:23.184Z'
+                      createdBy: ngantk
+                      modifiedAt: '2021-06-22T07:53:51.701Z'
+                      modifiedBy: ngantk
+                      id: 263
+                      phone: '0344230738'
+                      detail: jdjdbd
+                      location:
+                        createdAt: '2020-11-18T07:39:41.402115Z'
+                        createdBy: ducmami
+                        modifiedAt: null
+                        modifiedBy: null
+                        id: '10540'
+                        code: '30601'
+                        name: Xã Bình Thạnh
+                        description: null
+                        display: 'Xã Bình Thạnh, Huyện Châu Thành, Tỉnh An Giang'
+                        position: 0
+                        type: WARD
+                        parent:
+                          createdAt: '2020-11-18T07:39:41.402115Z'
+                          createdBy: ducmami
+                          modifiedAt: null
+                          modifiedBy: null
+                          id: '657'
+                          code: '892'
+                          name: Huyện Châu Thành
+                          description: null
+                          display: 'Huyện Châu Thành, Tỉnh An Giang'
+                          position: 0
+                          type: DISTRICT
+                          parent:
+                            createdAt: '2020-11-18T07:39:41.402115Z'
+                            createdBy: ducmami
+                            modifiedAt: null
+                            modifiedBy: null
+                            id: '32'
+                            code: '89'
+                            name: Tỉnh An Giang
+                            description: null
+                            display: Tỉnh An Giang
+                            position: 0
+                            type: PROVINCE
+                            parent: null
+                            language: null
+                          language: null
+                        language: null
+                      note: ''
+                      defaultAddress: false
+                      fullname: test1
+                      addressName: ''
       operationId: get-api-customer-addresses
       description: Các địa chỉ của khách hàng
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          required: true
+      parameters: []
 components:
   schemas:
     Draft-Shipment:
       title: Draft-Shipment
       type: object
-      x-tags:
-        - model
       description: ''
       properties:
         id:
@@ -2679,6 +2905,8 @@ components:
           type: string
         modifiedAt:
           type: string
+      x-tags:
+        - Models
     Shipment-Service:
       title: Shipment-Service
       type: object
@@ -2739,7 +2967,7 @@ components:
         approved:
           type: boolean
       x-tags:
-        - model
+        - Models
     Service-Group:
       title: Service-Group
       type: object
@@ -2768,7 +2996,7 @@ components:
           type: string
       description: Service Group
       x-tags:
-        - model
+        - Models
     Draft-Shipment-Fee:
       title: Draft-Shipment-Fee
       type: object
@@ -2781,14 +3009,12 @@ components:
           type: string
         provisionalAmount:
           type: number
-      x-tags:
-        - model
       description: Draft shipment fee
+      x-tags:
+        - Models
     Location:
       title: Location
       type: object
-      x-tags:
-        - model
       properties:
         id:
           type: string
@@ -2847,6 +3073,8 @@ components:
               language: null
             language: null
           language: null
+      x-tags:
+        - Models
     Category-Shipment-Service:
       title: Category-Shipment-Service
       type: object
@@ -2884,12 +3112,10 @@ components:
         modifiedAt:
           type: string
       x-tags:
-        - Category
+        - Models
     Customer-Shipment:
       title: Customer-Shipment
       type: object
-      x-tags:
-        - model
       properties:
         customer:
           title: Simple-Customer
@@ -3420,6 +3646,8 @@ components:
           actualWeight: null
           volumetric: null
           declareValue: null
+      x-tags:
+        - Models
     Customer:
       title: Customer
       type: object
@@ -3732,7 +3960,7 @@ components:
         modifiedAt:
           type: string
       x-tags:
-        - model
+        - Models
     Error-Response:
       title: Error-Response
       type: object
@@ -3743,6 +3971,8 @@ components:
           type: string
         detail:
           type: string
+      x-tags:
+        - Models
     Customer-Waybill:
       title: Customer-Waybill
       type: object
@@ -3803,6 +4033,8 @@ components:
           type: string
         recipientPhone:
           type: string
+      x-tags:
+        - Models
     Category-Harmonized-Commodity:
       title: Category-Harmonized-Commodity
       type: object
@@ -3827,6 +4059,8 @@ components:
           type: string
         modifiedBy:
           type: string
+      x-tags:
+        - Models
     Customer-Shipment-Product:
       title: Customer-Shipment-Product
       type: object
@@ -3902,6 +4136,8 @@ components:
                 type: string
               value:
                 type: string
+      x-tags:
+        - Models
     Customer-Address:
       title: Customer-Address
       type: object
@@ -3930,6 +4166,249 @@ components:
           type: string
         modifiedAt:
           type: string
+      x-tags:
+        - Models
+    Tenant:
+      title: Tenant
+      type: object
+      properties:
+        id:
+          type: string
+        domain:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        contact:
+          type: string
+        suspensionSchedule:
+          $ref: '#/components/schemas/System-Suspension-Schedule'
+        tenantConfig:
+          $ref: '#/components/schemas/Tenant-Config'
+      x-examples:
+        example-1:
+          id: da7ad3a6-f2b9-4a48-9422-2b71c63572a3
+          domain: baogam.gobizdev.com
+          code: baogam
+          name: Báo Gấm.
+          description: Báo Gấm dịch vụ nhập hàng từ các website thương mại điện tử hàng đầu Trung Quốc.
+          contact: null
+          tenantConfig:
+            defaultCurrency: VND
+            maxSkuByMerchant: 100000
+            defaultPermissions: []
+            orderCodePrefix: BG
+            ibizanUrl: null
+            ibizanDetailUrl: null
+            roundingStrategy: FLOOR
+            initialBalance: 10000000
+            logoStandard: 'http://cdn.gobiz.vn/gobiz_logo/logo-desktop.png'
+            logoLite: 'http://cdn.gobiz.vn/gobiz_logo/logo40.png'
+            customScript: null
+            customExternalScripts: null
+            customCss: null
+            customFavicon: null
+            orderAutoArchivePeriod: 604800
+            orderAutoConfirmPeriod: 604800
+            m6Activated: false
+            m5Activated: true
+            m5OrderUrl: 'http://m5.gobizdev.com/purchase-buying/{code}'
+            m6PackageUrl: 'http://m6.gobizdev.com/packages/detail/{code}'
+            emdPercent: 50
+            shipmentConfig:
+              enable: false
+            moduleUrl: {}
+            language: en-US
+          suspensionSchedule: null
+      x-tags:
+        - Models
+    Tenant-Config:
+      title: Tenant-Config
+      type: object
+      properties:
+        defaultCurrency:
+          type: string
+        maxSkuByMerchant:
+          type: integer
+        defaultPermissions:
+          type: array
+          items:
+            type: string
+        orderCodePrefix:
+          type: string
+        ibizanUrl:
+          type: string
+        ibizanDetailUrl:
+          type: string
+        roundingStrategy:
+          type: string
+        initialBalance:
+          type: number
+        logoStandard:
+          type: string
+        logoLite:
+          type: string
+        customScript:
+          type: string
+        customExternalScripts:
+          type: array
+          items:
+            type: string
+        customCss:
+          type: string
+        customFavicon:
+          type: string
+        orderAutoArchivePeriod:
+          type: integer
+        orderAutoConfirmPeriod:
+          type: integer
+        m6Activated:
+          type: boolean
+        m5Activated:
+          type: boolean
+        m5OrderUrl:
+          type: string
+        m6PackageUrl:
+          type: string
+        moduleUrl:
+          type: object
+        shipmentConfig:
+          type: object
+        language:
+          type: string
+      x-examples:
+        example-1:
+          defaultCurrency: VND
+          maxSkuByMerchant: 100000
+          defaultPermissions: []
+          orderCodePrefix: BG
+          ibizanUrl: null
+          ibizanDetailUrl: null
+          roundingStrategy: FLOOR
+          initialBalance: 10000000
+          logoStandard: 'http://cdn.gobiz.vn/gobiz_logo/logo-desktop.png'
+          logoLite: 'http://cdn.gobiz.vn/gobiz_logo/logo40.png'
+          customScript: null
+          customExternalScripts: null
+          customCss: null
+          customFavicon: null
+          orderAutoArchivePeriod: 604800
+          orderAutoConfirmPeriod: 604800
+          m6Activated: false
+          m5Activated: true
+          m5OrderUrl: 'http://m5.gobizdev.com/purchase-buying/{code}'
+          m6PackageUrl: 'http://m6.gobizdev.com/packages/detail/{code}'
+          emdPercent: 50
+          shipmentConfig:
+            enable: false
+          moduleUrl: {}
+          language: en-US
+      x-tags:
+        - Models
+    System-Suspension-Schedule:
+      title: System Suspension Schedule
+      type: object
+      description: ''
+      x-examples:
+        example-1:
+          createdAt: '2020-01-02T08:35:50.116853Z'
+          createdBy:
+            id: 88
+            username: ducmami
+            email: ducmami@gmail.com
+            fullname: MAI MINH DUC
+            nickname: ducmami
+            avatar: null
+            phone: 982633388
+          modifiedAt: null
+          modifiedBy:
+            id: 88
+            username: ducmami
+            email: ducmami@gmail.com
+            fullname: MAI MINH DUC
+            nickname: ducmami
+            avatar: null
+            phone: 982633388
+          id: 09a77be0-896f-4a1f-aa15-9fcf4f965d3b
+          description: nhaphang
+          startTime: '2020-01-01T00:00:00.921Z'
+          endTime: '2020-01-31T23:59:59.997Z'
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        createdAt:
+          type: string
+        createdBy:
+          title: SImple-User-View
+          type: object
+          description: ''
+          properties:
+            id:
+              type: integer
+            username:
+              type: string
+            email:
+              type: string
+            fullname:
+              type: string
+            nickname:
+              type: string
+            avatar:
+              type: string
+            phone:
+              type: string
+          x-examples:
+            example-1:
+              id: 88
+              username: ducmami
+              email: ducmami@gmail.com
+              fullname: MAI MINH DUC
+              nickname: ducmami
+              avatar: null
+              phone: 982633388
+          x-tags:
+            - model
+        modifiedAt:
+          type: string
+        modifiedBy:
+          title: SImple-User-View
+          type: object
+          description: ''
+          properties:
+            id:
+              type: integer
+            username:
+              type: string
+            email:
+              type: string
+            fullname:
+              type: string
+            nickname:
+              type: string
+            avatar:
+              type: string
+            phone:
+              type: string
+          x-examples:
+            example-1:
+              id: 88
+              username: ducmami
+              email: ducmami@gmail.com
+              fullname: MAI MINH DUC
+              nickname: ducmami
+              avatar: null
+              phone: 982633388
+      x-tags:
+        - Models
   securitySchemes:
     bearerAuth:
       type: http
