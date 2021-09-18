@@ -3015,6 +3015,69 @@ components:
     Location:
       title: Location
       type: object
+      x-examples:
+        example-1:
+          createdAt: '2019-09-27T09:21:10.503146Z'
+          createdBy: chaos
+          modifiedAt: null
+          modifiedBy: null
+          id: '11304'
+          code: '00343'
+          name: Phường Nhân Chính
+          description: null
+          display: 'Phường Nhân Chính, Quận Thanh Xuân, Thành phố Hà Nội'
+          position: 5
+          type: WARD
+          parent:
+            createdAt: '2019-09-27T09:21:10.503146Z'
+            createdBy: chaos
+            modifiedAt: null
+            modifiedBy: null
+            id: '132'
+            code: 9
+            name: Quận Thanh Xuân
+            description: null
+            display: 'Quận Thanh Xuân, Thành phố Hà Nội'
+            position: 2
+            type: DISTRICT
+            parent:
+              createdAt: '2019-09-27T09:21:10.503146Z'
+              createdBy: chaos
+              modifiedAt: null
+              modifiedBy: null
+              id: '35'
+              code: '01'
+              name: Thành phố Hà Nội
+              description: null
+              display: Thành phố Hà Nội
+              position: 0
+              type: PROVINCE
+              parent: null
+              language: null
+            language: null
+          language: null
+      x-tags:
+        - Models
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        display:
+          type: string
+        position:
+          type: integer
+        type:
+          type: string
+        parent:
+          $ref: '#/components/schemas/Sub-Location'
+    Sub-Location:
+      title: Sub-Location
+      type: object
       properties:
         id:
           type: string
