@@ -745,208 +745,6 @@ paths:
       x-internal: false
       security:
         - bearerAuth: []
-    get:
-      summary: Get list Shipment
-      operationId: get-api-customer-shipments
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Customer-Shipment'
-              examples:
-                example-1:
-                  value:
-                    - createdAt: '2020-01-03T03:53:24.444Z'
-                      createdBy: lanhuong
-                      modifiedAt: '2020-01-03T03:53:24.471Z'
-                      modifiedBy: lanhuong
-                      customer:
-                        avatar: //www.gravatar.com/avatar/13282dcf0f343a6b5cdfd6e605716073?d=retro&s=256&r=g
-                        code: NU1000005
-                        contactAddress: ''
-                        customerGroup: null
-                        customerLevel: null
-                        customerStatus: ACTIVE
-                        dob: '2019-12-12T00:00:00Z'
-                        email: nguyenthilanhuong@gobiz.vn
-                        fullname: Lan Hương
-                        gender: female
-                        id: 23
-                        nickname: Lan Hương
-                        phone: 12345678
-                        rewardPoint: null
-                        username: lanhuong
-                      services:
-                        - createdAt: '2019-05-16T11:20:30.688199Z'
-                          createdBy: chaos
-                          modifiedAt: null
-                          modifiedBy: null
-                          id: 1
-                          code: cargo_insurance
-                          name: Phí bảo hiểm hàng hóa
-                          description: null
-                          position: 1
-                          requires: []
-                          excludes: []
-                          serviceGroup: null
-                          defaultApplied: false
-                          needApprove: false
-                          shipping: false
-                          approved: true
-                        - createdAt: '2019-05-16T11:20:30.688199Z'
-                          createdBy: chaos
-                          modifiedAt: null
-                          modifiedBy: null
-                          id: 4
-                          code: express_shipping
-                          name: Vận chuyển nhanh
-                          description: null
-                          position: 3
-                          requires: []
-                          excludes: []
-                          serviceGroup:
-                            createdAt: '2019-09-27T09:21:10.503146Z'
-                            createdBy: chaos
-                            modifiedAt: null
-                            modifiedBy: null
-                            id: 2
-                            code: shipping_group
-                            name: Dịch vụ chuyển phát
-                            description: null
-                            position: null
-                            single: true
-                            required: true
-                          defaultApplied: false
-                          needApprove: false
-                          shipping: true
-                          approved: true
-                        - createdAt: '2019-05-16T11:20:30.688199Z'
-                          createdBy: chaos
-                          modifiedAt: null
-                          modifiedBy: null
-                          id: 11
-                          code: standard_packaging
-                          name: Đóng gỗ chung
-                          description: null
-                          position: 6
-                          requires: []
-                          excludes: []
-                          serviceGroup:
-                            createdAt: '2019-09-27T09:21:10.503146Z'
-                            createdBy: chaos
-                            modifiedAt: null
-                            modifiedBy: null
-                            id: 1
-                            code: packaging_group
-                            name: Dịch vụ đóng hàng
-                            description: null
-                            position: null
-                            single: true
-                            required: false
-                          defaultApplied: false
-                          needApprove: false
-                          shipping: false
-                          approved: true
-                      image: null
-                      status: ACCEPTED
-                      code: BG0HZRV_KG
-                      remark: null
-                      note: null
-                      provisionalAmount: 10000
-                      totalFee: 10000
-                      totalUnpaid: 10000
-                      timestamp: '2020-01-03T03:53:24.418Z'
-                      totalValue: null
-                      address:
-                        createdAt: '2020-01-03T03:53:24.450Z'
-                        createdBy: lanhuong
-                        modifiedAt: '2020-01-03T03:53:24.450Z'
-                        modifiedBy: lanhuong
-                        id: 26
-                        fullname: Lan Hương
-                        phone: 988888888
-                        address: 164 Khuất Duy Tiến
-                        location:
-                          createdAt: '2019-09-27T09:21:10.503146Z'
-                          createdBy: chaos
-                          modifiedAt: null
-                          modifiedBy: null
-                          id: '11304'
-                          code: '00343'
-                          name: Phường Nhân Chính
-                          description: null
-                          display: 'Phường Nhân Chính, Quận Thanh Xuân, Thành phố Hà Nội'
-                          position: 5
-                          type: WARD
-                          parent:
-                            createdAt: '2019-09-27T09:21:10.503146Z'
-                            createdBy: chaos
-                            modifiedAt: null
-                            modifiedBy: null
-                            id: '132'
-                            code: 9
-                            name: Quận Thanh Xuân
-                            description: null
-                            display: 'Quận Thanh Xuân, Thành phố Hà Nội'
-                            position: 2
-                            type: DISTRICT
-                            parent:
-                              createdAt: '2019-09-27T09:21:10.503146Z'
-                              createdBy: chaos
-                              modifiedAt: null
-                              modifiedBy: null
-                              id: '35'
-                              code: '01'
-                              name: Thành phố Hà Nội
-                              description: null
-                              display: Thành phố Hà Nội
-                              position: 0
-                              type: PROVINCE
-                              parent: null
-                              language: null
-                            language: null
-                          language: null
-                        note: ''
-                        hash: 394a9ed64afc273946ba341962433873
-                      exchangeRate: 3000
-                      actualWeight: null
-                      volumetric: null
-                      declareValue: null
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-        - schema:
-            type: string
-          in: query
-          name: timestampFrom
-        - schema:
-            type: string
-          in: query
-          name: timestampTo
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          name: services
-          description: List service code
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          name: statuses
-      description: Danh sách đơn ký gửi
-      tags:
-        - Shipment
-      security:
-        - bearerAuth: []
   '/api/customer/shipments/{code}':
     parameters:
       - schema:
@@ -1583,9 +1381,6 @@ paths:
                 refCustomerCode:
                   type: string
                   description: Mã khách hàng khách hàng
-                hsCode:
-                  type: string
-                  description: Nhóm ngành hàng
       tags:
         - Shipment
       security:
@@ -1679,84 +1474,6 @@ paths:
       parameters: []
       description: Thông tin các các dịch vụ của đơn ký gửi
       security: []
-  /api/customer/profile:
-    get:
-      summary: Get Customer Profile
-      tags:
-        - Customer
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer'
-              examples:
-                example-1:
-                  value:
-                    avatar: //www.gravatar.com/avatar/9263AE1F3B547DA9AF170EEE0B12D20F?d=retro&s=256&r=g
-                    balance: null
-                    code: N776
-                    contactAddress: '76'
-                    customerAuthorities:
-                      importParcel: true
-                      printParcelStamp: true
-                      draftServicesEnable: false
-                    customerGroup:
-                      id: 40
-                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                      code: haha
-                      name: haha
-                      description: null
-                      configGroup: null
-                      createdBy:
-                        avatar: //www.gravatar.com/avatar/EC2BADA21521263B2F7086981C17CE03?d=retro&s=256&r=g
-                        email: maiminhduc@gobiz.vn
-                        fullname: Admin
-                        id: 6
-                        nickname: ''
-                        phone: '09876543210'
-                        staff: false
-                        username: admin
-                      modifiedBy:
-                        avatar: //www.gravatar.com/avatar/EC2BADA21521263B2F7086981C17CE03?d=retro&s=256&r=g
-                        email: maiminhduc@gobiz.vn
-                        fullname: Admin
-                        id: 6
-                        nickname: ''
-                        phone: '09876543210'
-                        staff: false
-                        username: admin
-                      createdAt: '2020-12-23T02:37:19.958Z'
-                      modifiedAt: '2020-12-23T02:37:19.958Z'
-                      emdPercent: null
-                      categoryConfigGroups: null
-                    customerLevel:
-                      createdAt: '2021-09-07T02:59:07.551Z'
-                      createdBy: admin
-                      modifiedAt: '2021-09-07T02:59:07.551Z'
-                      modifiedBy: admin
-                      id: b2864a9c-ae62-4e95-b4cb-a58ac2d0c17a
-                      name: VIP 8
-                      minPoint: 9000
-                      maxPoint: 2147492647
-                      imageUrl: null
-                    customerStatus: ACTIVE
-                    dob: '1997-11-18T00:00:00Z'
-                    email: nguyenthikimnga@gobiz.vn
-                    fullname: Nga Kim
-                    gender: female
-                    id: 5
-                    nickname: Nga Kim
-                    peerPaymentConfigGroupId: 02494e18-dcc9-421f-ba9e-b30d5925d151
-                    phone: '0123456788'
-                    rewardPoint: 2141705.7414
-                    username: ngantk
-                    zaloId: '7722188066535117386'
-      operationId: get-api-customer-profile
-      parameters: []
-      security:
-        - bearerAuth: []
   /oauth/token:
     post:
       summary: Get token / Login
@@ -2189,6 +1906,14 @@ paths:
             type: string
           in: query
           name: createdTimeTo
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
       description: Danh sách mã vận đơn của khách hàng
       tags:
         - Customer-Waybill
@@ -2332,47 +2057,6 @@ paths:
         - Customer-Waybill
       security:
         - bearerAuth: []
-  /api/categories/harmonized_commodity:
-    get:
-      summary: Get list harmonized commodity
-      tags:
-        - Category
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Category-Harmonized-Commodity'
-              examples:
-                example-1:
-                  value:
-                    - createdAt: null
-                      createdBy: null
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: 6
-                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                      code: game
-                      name: Đồ chơi
-                      description: null
-                      priority: 0
-                    - createdAt: null
-                      createdBy: null
-                      modifiedAt: null
-                      modifiedBy: null
-                      id: 7
-                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                      code: electronics
-                      name: Đồ điện tử
-                      description: null
-                      priority: 0
-      operationId: get-api-categories-harmonized_commodity
-      description: Danh sách các nhóm ngành hàng
-      parameters: []
-      security: []
   '/api/customer/shipments/{code}/products':
     parameters:
       - schema:
@@ -2450,7 +2134,15 @@ paths:
                     detail: Can not find shipment with code '$shipmentCode'
       operationId: get-api-customer-shipments-code-products
       description: Danh sách các sản phẩm của đơn ký gửi
-      parameters: []
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
       security:
         - bearerAuth: []
     post:
@@ -2919,6 +2611,14 @@ paths:
             type: string
           in: query
           name: displayName
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
       requestBody:
         content:
           application/json:
@@ -4203,32 +3903,6 @@ components:
         recipientAddress:
           type: string
         recipientPhone:
-          type: string
-      x-tags:
-        - Models
-    Category-Harmonized-Commodity:
-      title: Category-Harmonized-Commodity
-      type: object
-      properties:
-        id:
-          type: string
-        tenantId:
-          type: string
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        priority:
-          type: string
-        createdAt:
-          type: string
-        createdBy:
-          type: string
-        modifiedAt:
-          type: string
-        modifiedBy:
           type: string
       x-tags:
         - Models
