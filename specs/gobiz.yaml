@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: 0.0.1
   title: Amphitrite API
-  description: '# API M1 của Gobiz'
+  description: "# API M1 của Gobiz\n Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi \n\n Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi"
 servers:
   - description: Ong Vàng - Staging
     url: 'https://ongvang.order.gobizdev.com'
@@ -446,12 +446,7 @@ paths:
                     title: user_is_banned
                     status: 403
                     detail: Account is banned. You can not create new shipment!
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -705,12 +700,7 @@ paths:
                     title: address_not_found
                     status: 400
                     detail: Address id must not be null
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -1354,12 +1344,7 @@ paths:
                     status: 404
                     detail: Can not found shipment with code $code
       description: ''
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -1633,12 +1618,7 @@ paths:
               example-1:
                 value:
                   code: '123456'
-      parameters:
-        - schema:
-            type: string
-          in: header
-          required: true
-          name: Content-Type
+      parameters: []
       description: ''
       tags:
         - Shipment
@@ -1691,363 +1671,10 @@ paths:
                     title: shipment_not_found
                     status: 404
                     detail: Could not found waybill with code '$waybillCode'
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       tags:
         - Shipment
       description: Xóa mã vận đơn trong đơn ký gửi
-      security:
-        - bearerAuth: []
-  /api/customer/customer_waybills/add_batch:
-    post:
-      summary: Thêm mã vận đơn khách hàng
-      operationId: post-api-customer-customer_waybills-add_batch
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Customer-Waybill'
-              examples:
-                example-1:
-                  value:
-                    - createdAt: '2021-09-17T09:57:50.416Z'
-                      createdBy: ngantk
-                      modifiedAt: '2021-09-17T09:57:50.416Z'
-                      modifiedBy: ngantk
-                      id: d2c970c7-2111-4a7d-9c56-13dd2d715f69
-                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                      customerId: 5
-                      shipmentCode: null
-                      code: '123123'
-                      description: test
-                      courierCompany: null
-                      status: INITIALIZATION
-                      receivingWarehouse: null
-                      receivedTime: null
-                    - createdAt: '2021-09-17T09:57:50.428Z'
-                      createdBy: ngantk
-                      modifiedAt: '2021-09-17T09:57:50.428Z'
-                      modifiedBy: ngantk
-                      id: 939400e7-0fea-4981-bdfd-f187b3b32959
-                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                      customerId: 5
-                      shipmentCode: null
-                      code: '123456'
-                      description: test
-                      courierCompany: null
-                      status: INITIALIZATION
-                      receivingWarehouse: null
-                      receivedTime: null
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-Response'
-              examples:
-                example-1:
-                  value:
-                    title: too_much_waybill
-                    status: 400
-                    detail: 'There is too much waybill number, please try again'
-                example-2:
-                  value:
-                    title: default_address_not_found
-                    status: 400
-                    detail: You should create a default address
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                receivingWarehouse:
-                  type: string
-                waybillNumbers:
-                  type: array
-                  items:
-                    type: string
-                description:
-                  type: string
-            examples:
-              example-1:
-                value:
-                  receivingWarehouse: K-HN
-                  waybillNumbers:
-                    - '1102'
-                    - '2210'
-                  description: test
-        description: ''
-      description: Thêm mã vận đơn khách hàng
-      tags:
-        - Customer-Waybill
-      security:
-        - bearerAuth: []
-  /api/customer/customer_waybills:
-    get:
-      summary: Danh sách mã vận đơn khách hàng
-      operationId: get-api-customer-waybills
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Customer-Waybill'
-              examples:
-                example-1:
-                  value:
-                    - createdAt: '2021-03-19T08:03:02.060Z'
-                      createdBy: ngantk
-                      modifiedAt: '2021-03-19T08:03:11.868Z'
-                      modifiedBy: ngantk
-                      id: 021d360f-b473-44a2-95d4-bef0ff4d6972
-                      tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                      customerId: 5
-                      shipmentCode: N776_3219171
-                      code: Q3456YWT5Y436356
-                      description: null
-                      courierCompany: null
-                      status: MATCHED_TO_SHIPMENT
-                      receivingWarehouse:
-                        createdAt: '2020-11-19T04:37:17.080Z'
-                        createdBy: admin
-                        modifiedAt: '2021-05-17T08:00:52.412Z'
-                        modifiedBy: admin
-                        id: 18
-                        code: CNGZ
-                        name: CNGZ
-                        description: Kho này được tạo ra bởi ngantk
-                        position: 22
-                        location:
-                          createdAt: '2020-11-18T07:39:41.402115Z'
-                          createdBy: example
-                          modifiedAt: null
-                          modifiedBy: null
-                          id: '141'
-                          code: '187'
-                          name: Huyện Chi Lăng
-                          description: null
-                          display: 'Huyện Chi Lăng, Tỉnh Lạng Sơn'
-                          position: 0
-                          type: DISTRICT
-                          parent:
-                            createdAt: '2020-11-18T07:39:41.402115Z'
-                            createdBy: example
-                            modifiedAt: null
-                            modifiedBy: null
-                            id: '5'
-                            code: '20'
-                            name: Tỉnh Lạng Sơn
-                            description: null
-                            display: Tỉnh Lạng Sơn
-                            position: 0
-                            type: PROVINCE
-                            parent: null
-                            language: null
-                          language: null
-                        enabled: true
-                        delivered: true
-                        received: true
-                        address: |-
-                          收货地址：广东省，广州市，白云区，均禾街道，石马村旺发大街92号C栋SCB仓库 [[username]] [[order_code]]
-                          邮政编码：510440
-                          电话号码：13148959544
-                          收货人： SCB-[[order_code]]
-                        recipientName: 'SCB-[[order_code]]'
-                        recipientAddress: '平沙路5号X单元C门 TESTBG 仓库 [[username]] [[order_code]]'
-                        recipientPhone: '13148959544'
-                      receivedTime: '2021-03-19T08:03:11.862Z'
-      parameters:
-        - schema:
-            type: array
-            items:
-              type: string
-          in: query
-          name: statuses
-          style: pipeDelimited
-        - schema:
-            type: string
-          in: query
-          name: receivedTimeFrom
-        - schema:
-            type: string
-          in: query
-          name: receivedTimeTo
-        - schema:
-            type: string
-            format: date-time
-          in: query
-          name: createdTimeFrom
-        - schema:
-            type: string
-          in: query
-          name: createdTimeTo
-        - schema:
-            type: integer
-          in: query
-          name: page
-        - schema:
-            type: integer
-          in: query
-          name: size
-      description: Danh sách mã vận đơn của khách hàng
-      tags:
-        - Customer-Waybill
-      security:
-        - bearerAuth: []
-  '/api/customer/customer_waybills/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    patch:
-      summary: Cập nhật mã vận đơn khách hàng
-      operationId: patch-api-customer-customer_waybills-id
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Customer-Waybill'
-              examples:
-                example-1:
-                  value:
-                    createdAt: '2021-03-19T08:03:02.060Z'
-                    createdBy: ngantk
-                    modifiedAt: '2021-03-19T08:03:11.868Z'
-                    modifiedBy: ngantk
-                    id: 021d360f-b473-44a2-95d4-bef0ff4d6972
-                    tenantId: baogam00-769c-4f16-b934-7e4fd4036db1
-                    customerId: 5
-                    shipmentCode: N776_3219171
-                    code: Q3456YWT5Y436356
-                    description: null
-                    courierCompany: null
-                    status: MATCHED_TO_SHIPMENT
-                    receivingWarehouse:
-                      createdAt: '2020-11-19T04:37:17.080Z'
-                      createdBy: admin
-                      modifiedAt: '2021-05-17T08:00:52.412Z'
-                      modifiedBy: admin
-                      id: 18
-                      code: CNGZ
-                      name: CNGZ
-                      description: Kho này được tạo ra bởi ngantk
-                      position: 22
-                      location:
-                        createdAt: '2020-11-18T07:39:41.402115Z'
-                        createdBy: example
-                        modifiedAt: null
-                        modifiedBy: null
-                        id: '141'
-                        code: '187'
-                        name: Huyện Chi Lăng
-                        description: null
-                        display: 'Huyện Chi Lăng, Tỉnh Lạng Sơn'
-                        position: 0
-                        type: DISTRICT
-                        parent:
-                          createdAt: '2020-11-18T07:39:41.402115Z'
-                          createdBy: example
-                          modifiedAt: null
-                          modifiedBy: null
-                          id: '5'
-                          code: '20'
-                          name: Tỉnh Lạng Sơn
-                          description: null
-                          display: Tỉnh Lạng Sơn
-                          position: 0
-                          type: PROVINCE
-                          parent: null
-                          language: null
-                        language: null
-                      enabled: true
-                      delivered: true
-                      received: true
-                      address: |-
-                        收货地址：广东省，广州市，白云区，均禾街道，石马村旺发大街92号C栋SCB仓库 [[username]] [[order_code]]
-                        邮政编码：510440
-                        电话号码：13148959544
-                        收货人： SCB-[[order_code]]
-                      recipientName: 'SCB-[[order_code]]'
-                      recipientAddress: '平沙路5号X单元C门 TESTBG 仓库 [[username]] [[order_code]]'
-                      recipientPhone: '13148959544'
-                    receivedTime: '2021-03-19T08:03:11.862Z'
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                description:
-                  type: string
-      description: Cập nhật mã vận đơn khách hàng
-      tags:
-        - Customer-Waybill
-      security:
-        - bearerAuth: []
-  '/api/customer/customer_waybills/{code}':
-    parameters:
-      - schema:
-          type: string
-        name: code
-        in: path
-        required: true
-    delete:
-      summary: Xóa mã vận đơn khách hàng
-      operationId: delete-api-customer-customer_waybills-code
-      responses:
-        '204':
-          description: No Content
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error-Response'
-              examples:
-                example-1:
-                  value:
-                    title: customer_waybill_not_found
-                    status: 404
-                    detail: Customer waybill with code $code does not exist
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
-      description: ''
-      tags:
-        - Customer-Waybill
       security:
         - bearerAuth: []
   '/api/customer/shipments/{code}/products':
@@ -2215,12 +1842,7 @@ paths:
                     title: shipment_not_found
                     status: 404
                     detail: Can not find shipment with code '$shipmentCode'
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+      parameters: []
       description: ''
       requestBody:
         content:
@@ -2395,15 +2017,10 @@ paths:
                 merchantContact:
                   type: string
                 quantity:
-                  type: string
+                  type: integer
                 unitPrice:
-                  type: string
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Content-Type
-          required: true
+                  type: number
+      parameters: []
       tags:
         - Shipment
       security:
@@ -2979,6 +2596,8 @@ components:
     Category-Shipment-Service:
       title: Category-Shipment-Service
       type: object
+      x-tags:
+        - Models
       properties:
         code:
           type: string
@@ -2998,6 +2617,8 @@ components:
             type: string
         serviceGroup:
           $ref: '#/components/schemas/Service-Group'
+        shippingClass:
+          $ref: '#/components/schemas/Shipping-Class'
         defaultApplied:
           type: boolean
         needApprove:
@@ -3012,8 +2633,6 @@ components:
           type: string
         modifiedAt:
           type: string
-      x-tags:
-        - Models
     Customer-Shipment:
       title: Customer-Shipment
       type: object
@@ -3549,42 +3168,6 @@ components:
           declareValue: null
       x-tags:
         - Models
-    Customer:
-      title: Customer
-      type: object
-      x-tags:
-        - Models
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-        fullname:
-          type: string
-        nickname:
-          type: string
-        avatar:
-          type: string
-        phone:
-          type: string
-        code:
-          type: string
-        dob:
-          type: string
-        contactAddress:
-          type: string
-        gender:
-          type: string
-        customerStatus:
-          type: string
-        customerGroup:
-          $ref: '#/components/schemas/Customer-Group'
-        customerLevel:
-          $ref: '#/components/schemas/Customer-Level'
-        rewardPoint:
-          type: number
-        id:
-          type: integer
     Customer-Group:
       title: Customer-Group
       type: object
@@ -3617,74 +3200,6 @@ components:
           type: string
       x-tags:
         - Models
-    Cart-Product:
-      title: Cart-Product
-      type: object
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        merchant:
-          type: string
-        originalId:
-          type: string
-        originalName:
-          type: string
-        image:
-          type: string
-        name:
-          type: string
-        url:
-          type: string
-        batchSize:
-          type: integer
-        minQuantity:
-          type: integer
-        skus:
-          $ref: '#/components/schemas/Cart-Sku'
-      x-tags:
-        - Models
-    Cart-Sku:
-      title: Cart-Sku
-      type: object
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        variantProperties:
-          $ref: '#/components/schemas/Variant-Properties'
-        image:
-          type: string
-        remark:
-          type: string
-        note:
-          type: string
-        currency:
-          type: string
-        quantity:
-          type: integer
-        stock:
-          type: integer
-        originalPrice:
-          type: number
-        exchangedOriginalPrice:
-          type: number
-        salePrice:
-          type: number
-        exchangedSalePrice:
-          type: number
-        totalAmount:
-          type: number
-        exchangedTotalAmount:
-          type: number
-        pricePolicy:
-          $ref: '#/components/schemas/Price-Policy'
-        timestamp:
-          type: string
-      x-tags:
-        - Models
     Variant-Properties:
       title: Variant-Properties
       type: object
@@ -3698,62 +3213,6 @@ components:
         originalValue:
           type: string
         value:
-          type: string
-      x-tags:
-        - Models
-    Price-Policy:
-      title: Price-Policy
-      type: object
-      x-tags:
-        - Models
-      properties:
-        min:
-          type: string
-        max:
-          type: string
-        originalPrice:
-          type: number
-        currency:
-          type: string
-        salePrice:
-          type: string
-    Category-Order-Service:
-      title: Category-Order-Service
-      type: object
-      properties:
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        position:
-          type: integer
-        requires:
-          type: array
-          items:
-            type: string
-        dependencies:
-          type: array
-          items:
-            type: string
-        excludes:
-          type: array
-          items:
-            type: string
-        serviceGroup:
-          $ref: '#/components/schemas/Service-Group'
-        shippingClass:
-          $ref: '#/components/schemas/Shipping-Class'
-        defaultApplied:
-          type: boolean
-        needApprove:
-          type: boolean
-        shipping:
-          type: boolean
-        approved:
-          type: boolean
-        serviceInfo:
           type: string
       x-tags:
         - Models
@@ -3838,71 +3297,11 @@ components:
           type: string
       x-tags:
         - Models
-    Customer-Waybill:
-      title: Customer-Waybill
-      type: object
-      x-tags:
-        - Models
-      properties:
-        id:
-          type: integer
-        customerId:
-          type: integer
-        shipmentCode:
-          type: string
-        code:
-          type: string
-        description:
-          type: string
-        courierCompany:
-          type: string
-        receivingWarehouse:
-          $ref: '#/components/schemas/Category-Warehouse'
-        receivedTime:
-          type: string
-        createdAt:
-          type: string
-        createdBy:
-          type: string
-        modifiedAt:
-          type: string
-        modifiedBy:
-          type: string
-    Category-Warehouse:
-      title: Category-Warehouse
-      type: object
-      properties:
-        id:
-          type: string
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        position:
-          type: string
-        location:
-          $ref: ./poseidon.v1.yml#/components/schemas/Location
-        enabled:
-          type: boolean
-        delivered:
-          type: boolean
-        received:
-          type: boolean
-        address:
-          type: string
-        recipientName:
-          type: string
-        recipientAddress:
-          type: string
-        recipientPhone:
-          type: string
-      x-tags:
-        - Models
     Customer-Shipment-Product:
       title: Customer-Shipment-Product
       type: object
+      x-tags:
+        - Models
       properties:
         id:
           type: string
@@ -3929,11 +3328,11 @@ components:
         merchantContact:
           type: string
         quantity:
-          type: string
+          type: integer
         receivedQuantity:
-          type: string
+          type: integer
         unitPrice:
-          type: string
+          type: number
         remark:
           type: string
         note:
@@ -3963,20 +3362,7 @@ components:
         variantProperties:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: string
-              originalName:
-                type: string
-              name:
-                type: string
-              originalValue:
-                type: string
-              value:
-                type: string
-      x-tags:
-        - Models
+            $ref: '#/components/schemas/Variant-Properties'
     Customer-Address:
       title: Customer-Address
       type: object
@@ -4256,12 +3642,10 @@ components:
 tags:
   - name: Tenant
   - name: Draft-Shipment
-    description: Gồm các API dùng để tạo và lấy ra thông tin đơn nháp của đơn ký gửi. Sau khi đã có đơn nháp ta sẽ tạo được ra đơn ký gửi dựa trên thông tin đơn nháp
+    description: "Gồm các API dùng để tạo và lấy ra thông tin đơn nháp của đơn ký gửi."
   - name: Shipment
     description: 'Bao gồm những API cho phép thêm, sửa đơn hàng ký gửi. Bên cạnh đó sẽ có những API của các thông tin thuộc đơn ký gửi đó là: Các API thêm xóa mã vận đơn, thêm sửa xóa sản phẩm trong đơn ký gửi.'
   - name: Category
-    description: 'Bao gồm các API dùng để lấy ra dữ liệu để phục vụ các API khác. Ví dụ: để tạo ra địa chỉ thì cần có location code, để tạo được đơn nháp cần có service code.'
-  - name: Customer-Waybill
-    description: 'Gồm các API phục vụ các chức năng thêm sửa xóa các mã vận đơn của khách hàng.'
+    description: 'Bao gồm các API dùng để lấy ra dữ liệu để phục vụ các API khác.'
   - name: Customer
-    description: 'Gồm các API liên quan đến thông tin của khách hàng. Lấy token của khách hàng để sử dụng cho những API thuộc scope của khách hàng. Thêm mới địa chỉ của khách hàng và danh sách địa chỉ hiện có của khách hàng.'
+    description: 'Gồm các API liên quan đến thông tin của khách hàng.'
