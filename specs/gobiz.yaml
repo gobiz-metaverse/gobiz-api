@@ -2,12 +2,16 @@ openapi: 3.0.0
 info:
   version: 0.0.1
   title: Amphitrite API
-  description: "# API M1 của Gobiz\n Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi \n\n Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi"
+  description: |-
+    # API M1 của Gobiz
+     Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi
+
+     Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi
 servers:
-  - description: Ong Vàng - Staging
-    url: 'https://ongvang.order.gobizdev.com'
+  - description: Báo gấm - Test
+    url: 'https://baogam.order.gobizdev.com'
 paths:
-  /api/customer/draft_shipments:
+  /open-api/customer/draft_shipments:
     get:
       summary: Lấy ra thông tin đơn nháp
       responses:
@@ -323,7 +327,7 @@ paths:
       description: Tạo đơn nháp
       security:
         - bearerAuth: []
-  /api/customer/shipments:
+  /open-api/customer/shipments:
     post:
       summary: Tạo đơn ký gửi
       operationId: post-api-customer-shipments
@@ -522,6 +526,16 @@ paths:
                     title: warehouse_location_not_mapped
                     status: 400
                     detail: Can not map warehouse with location ...
+                system_currently_suspended:
+                  value:
+                    title: system_currently_suspended
+                    status: 400
+                    detail: System currently suspended
+                draft_shipment_not_found:
+                  value:
+                    title: draft_shipment_not_found
+                    status: 400
+                    detail: Draft shipment not found
         '404':
           description: Not Found
           content:
@@ -572,7 +586,7 @@ paths:
       x-internal: false
       security:
         - bearerAuth: []
-  '/api/customer/shipments/{code}':
+  '/open-api/customer/shipments/{code}':
     parameters:
       - schema:
           type: string
@@ -1204,7 +1218,7 @@ paths:
         - Shipment
       security:
         - bearerAuth: []
-  /api/categories/shipment_services:
+  /open-api/categories/shipment_services:
     get:
       summary: Danh sách các loại dịch vụ của đơn ký gửi
       tags:
@@ -1289,11 +1303,23 @@ paths:
                           en: info info Tiếng anh nè
                           km: ព័ត៌មានជាភាសាវៀតណាម
                           vi: Đây là info Việt Nam nè
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-Response'
+              examples:
+                example-1:
+                  value:
+                    title: config_group
+                    status: 400
+                    detail: The config group is missing...
       operationId: get-api-categories-shipment_services
       parameters: []
       description: Thông tin các các dịch vụ của đơn ký gửi
       security: []
-  '/api/customer/shipments/{code}/waybill':
+  '/open-api/customer/shipments/{code}/waybill':
     parameters:
       - schema:
           type: string
@@ -1412,7 +1438,7 @@ paths:
         - Shipment
       security:
         - bearerAuth: []
-  '/api/customer/shipments/{code}/waybill/{waybillCode}':
+  '/open-api/customer/shipments/{code}/waybill/{waybillCode}':
     parameters:
       - schema:
           type: string
@@ -1465,7 +1491,7 @@ paths:
       description: Xóa mã vận đơn trong đơn ký gửi
       security:
         - bearerAuth: []
-  '/api/customer/shipments/{code}/products':
+  '/open-api/customer/shipments/{code}/products':
     parameters:
       - schema:
           type: string
@@ -1693,7 +1719,7 @@ paths:
         - Shipment
       security:
         - bearerAuth: []
-  '/api/customer/shipments/{code}/products/{productCode}':
+  '/open-api/customer/shipments/{code}/products/{productCode}':
     parameters:
       - schema:
           type: string
@@ -1813,7 +1839,7 @@ paths:
         - Shipment
       security:
         - bearerAuth: []
-  /api/customer/addresses:
+  /open-api/customer/addresses:
     get:
       summary: Danh sách các địa chỉ của khách hàng
       tags:
@@ -1989,7 +2015,7 @@ paths:
                 - phone
                 - detail
                 - location
-  /api/locations:
+  /open-api/locations:
     get:
       summary: Lấy thông tin các location
       tags:
@@ -3430,10 +3456,10 @@ components:
 tags:
   - name: Tenant
   - name: Draft-Shipment
-    description: "Gồm các API dùng để tạo và lấy ra thông tin đơn nháp của đơn ký gửi."
+    description: Gồm các API dùng để tạo và lấy ra thông tin đơn nháp của đơn ký gửi.
   - name: Shipment
     description: 'Bao gồm những API cho phép thêm, sửa đơn hàng ký gửi. Bên cạnh đó sẽ có những API của các thông tin thuộc đơn ký gửi đó là: Các API thêm xóa mã vận đơn, thêm sửa xóa sản phẩm trong đơn ký gửi.'
   - name: Category
-    description: 'Bao gồm các API dùng để lấy ra dữ liệu để phục vụ các API khác.'
+    description: Bao gồm các API dùng để lấy ra dữ liệu để phục vụ các API khác.
   - name: Customer
-    description: 'Gồm các API liên quan đến thông tin của khách hàng.'
+    description: Gồm các API liên quan đến thông tin của khách hàng.
