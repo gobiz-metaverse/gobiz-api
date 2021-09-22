@@ -1,14 +1,1 @@
 /.idea/
-/.idea/compiler.xml
-/.idea/misc.xml
-/*.log
-/*.log.gz
-/.idea/.gitignore
-/.idea/gobiz-kunlun.iml
-/.idea/gradle.xml
-/.idea/jarRepositories.xml
-/.idea/modules.xml
-/.idea/vcs.xml
-/.idea/workspace.xml
-/gobiz-gongbao/.gradle/
-/gobiz-gongbao/build/
