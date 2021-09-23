@@ -2,11 +2,21 @@ openapi: 3.0.0
 info:
   version: 0.0.1
   title: Amphitrite API
-  description: |-
-    # API M1 của Gobiz
-     Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi
-
-     Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi
+  description: "# API M1 của Gobiz\n
+     Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi\n\n
+     Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi.\n\n
+     Dưới đây là danh sách các trạng thái của đơn ký gửi kèm mô tả:\n
+     - Chờ Duyệt (PENDING): Đã tạo đơn trên Shippo, nhưng trong đó có sử dụng 1 dịch vụ mà cần duyệt.\n
+     - Đã ký gửi (ACCEPTED): Vận hành Shippo đã tiếp nhận đơn.\n
+     - Người Bán Giao (MERCHANT_DELIVERING): Seller đã gửi hàng và đơn hàng Shippo có thông tin mã vận đơn TQ.\n
+     - Hàng về kho (PUTAWAY): Đơn hàng đã đến kho TQ của Shippo .\n
+     - Vận chuyển Quốc tế (TRANSPORTING): Đơn hàng đã được xuất khỏi kho TQ của Shippo.\n
+     - Chờ giao (READY_FOR_DELIVERY): Đơn hàng đã đến kho phân phối tại Việt Nam của Shippo.\n
+     - Đang giao (DELIVERING): Đơn hàng đã xuất khỏi kho phân phối tại Việt Nam của Shippo và tiến hành giao cho khách hàng.\n
+     - Đã Nhận (DELIVERED): Đơn hàng đã được giao cho khách hàng.\n
+     - Hủy Bỏ (CANCELLED): Khách hàng đã đặt cọc nhưng hủy không mua nữa.\n
+     - Thất Lạc (MIA): Đơn hàng bị thất lạc, không thể tìm thấy tại kho của Shippo.\n
+     - Khách Không Nhận (DELIVERY_CANCELLED): Đơn hàng khách không đồng ý nhận do sự cố phát sinh như sai, lỗi,..."
 servers:
   - description: Ong Vàng - Staging
     url: 'https://ongvang.order.gobizdev.com'
