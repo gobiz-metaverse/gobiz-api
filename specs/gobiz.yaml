@@ -2,21 +2,24 @@ openapi: 3.0.0
 info:
   version: 0.0.1
   title: Amphitrite API
-  description: "# API M1 của Gobiz\n
-     Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi\n\n
-     Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi.\n\n
-     Dưới đây là danh sách các trạng thái của đơn ký gửi kèm mô tả:\n
-     - Chờ Duyệt (PENDING): Đã tạo đơn trên Shippo, nhưng trong đó có sử dụng 1 dịch vụ mà cần duyệt.\n
-     - Đã ký gửi (ACCEPTED): Vận hành Shippo đã tiếp nhận đơn.\n
-     - Người Bán Giao (MERCHANT_DELIVERING): Seller đã gửi hàng và đơn hàng Shippo có thông tin mã vận đơn TQ.\n
-     - Hàng về kho (PUTAWAY): Đơn hàng đã đến kho TQ của Shippo .\n
-     - Vận chuyển Quốc tế (TRANSPORTING): Đơn hàng đã được xuất khỏi kho TQ của Shippo.\n
-     - Chờ giao (READY_FOR_DELIVERY): Đơn hàng đã đến kho phân phối tại Việt Nam của Shippo.\n
-     - Đang giao (DELIVERING): Đơn hàng đã xuất khỏi kho phân phối tại Việt Nam của Shippo và tiến hành giao cho khách hàng.\n
-     - Đã Nhận (DELIVERED): Đơn hàng đã được giao cho khách hàng.\n
-     - Hủy Bỏ (CANCELLED): Khách hàng đã đặt cọc nhưng hủy không mua nữa.\n
-     - Thất Lạc (MIA): Đơn hàng bị thất lạc, không thể tìm thấy tại kho của Shippo.\n
-     - Khách Không Nhận (DELIVERY_CANCELLED): Đơn hàng khách không đồng ý nhận do sự cố phát sinh như sai, lỗi,..."
+  description: |
+    # API M1 của Gobiz
+     Đây là API docs của khách hàng gồm các chức năng: Tạo đơn ký gửi, cập nhật mã vận đơn, sản phẩm và mã đơn hàng khách hàng đơn ký gửi
+
+     Để tạo đơn ký gửi ta cần các bước: Tạo địa chỉ của khách hàng -> Tạo đơn nháp -> Tạo đơn ký gửi.
+
+     Dưới đây là danh sách các trạng thái của đơn ký gửi kèm mô tả:
+     - Chờ Duyệt (PENDING): Đã tạo đơn trên Shippo, nhưng trong đó có sử dụng 1 dịch vụ mà cần duyệt.
+     - Đã ký gửi (ACCEPTED): Vận hành Shippo đã tiếp nhận đơn.
+     - Người Bán Giao (MERCHANT_DELIVERING): Seller đã gửi hàng và đơn hàng Shippo có thông tin mã vận đơn TQ.
+     - Hàng về kho (PUTAWAY): Đơn hàng đã đến kho TQ của Shippo .
+     - Vận chuyển Quốc tế (TRANSPORTING): Đơn hàng đã được xuất khỏi kho TQ của Shippo.
+     - Chờ giao (READY_FOR_DELIVERY): Đơn hàng đã đến kho phân phối tại Việt Nam của Shippo.
+     - Đang giao (DELIVERING): Đơn hàng đã xuất khỏi kho phân phối tại Việt Nam của Shippo và tiến hành giao cho khách hàng.
+     - Đã Nhận (DELIVERED): Đơn hàng đã được giao cho khách hàng.
+     - Hủy Bỏ (CANCELLED): Khách hàng đã đặt cọc nhưng hủy không mua nữa.
+     - Thất Lạc (MIA): Đơn hàng bị thất lạc, không thể tìm thấy tại kho của Shippo.
+     - Khách Không Nhận (DELIVERY_CANCELLED): Đơn hàng khách không đồng ý nhận do sự cố phát sinh như sai, lỗi,...
 servers:
   - description: Ong Vàng - Staging
     url: 'https://ongvang.order.gobizdev.com'
@@ -2062,7 +2065,7 @@ paths:
           name: size
       security: []
       description: Thông tin của location phục vụ cho việc tạo địa chỉ của khách hàng
-  "/oauth/token":
+  /oauth/token:
     post:
       summary: Lấy token của khách hàng
       responses:
@@ -2111,6 +2114,94 @@ paths:
       description: API lấy token
       tags:
         - Customer
+  /open-api/customer/shipments/quick:
+    post:
+      summary: Tạo nhanh đơn ký gửi
+      operationId: post-open-api-customer-shipments-quick
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer-Shipment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error-Response'
+              examples:
+                example-1:
+                  value:
+                    title: invalid_location
+                    status: 400
+                    detail: Can not found location with code '$command.location'
+                example-2:
+                  value:
+                    title: action_do_not_allow
+                    status: 400
+                    detail: Can not add product with shipment status '$shipment.status'
+                example-3:
+                  value:
+                    title: user_is_banned
+                    status: 400
+                    detail: Account '$customer.username' is banned. You can not create new shipment!
+                example-4:
+                  value:
+                    title: address_not_null
+                    status: 400
+                    detail: Address cannot be null
+                example-5:
+                  value:
+                    title: warehouse_location_not_mapped
+                    status: 400
+                    detail: 'Can not map warehouse with location: ${customerAddress.location}'
+                example-6:
+                  value:
+                    type: 'https://zalando.github.io/problem/constraint-violation'
+                    status: 400
+                    violations:
+                      - field: quickCreateShipment.command.address
+                        message: must not be null
+                    title: Constraint Violation
+      description: 'API gộp 3 API: Tạo địa chỉ, tạo đơn nháp, tạo đơn ký gửi thành 1 API để tạo đơn ký gửi và thêm sản phẩm, mã vận đơn.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                services:
+                  type: array
+                  description: Danh sách dịch vụ
+                  items:
+                    type: string
+                products:
+                  type: array
+                  description: Danh sách sản phẩm
+                  items:
+                    $ref: '#/components/schemas/Shipment-Product-Create'
+                refShipmentCode:
+                  type: string
+                address:
+                  $ref: '#/components/schemas/Customer-Address-Create'
+                image:
+                  type: string
+                merchantName:
+                  type: string
+                merchantUrl:
+                  type: string
+                waybillCodes:
+                  type: array
+                  items:
+                    type: string
+            examples: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
 components:
   schemas:
     Draft-Shipment:
@@ -3217,6 +3308,8 @@ components:
     Customer-Address:
       title: Customer-Address
       type: object
+      x-tags:
+        - Models
       properties:
         id:
           type: string
@@ -3242,13 +3335,141 @@ components:
           type: string
         modifiedAt:
           type: string
+    Customer-Address-Create:
+      title: Customer-Address-Create
+      type: object
       x-tags:
         - Models
+      properties:
+        fullname:
+          type: string
+        phone:
+          type: string
+        detail:
+          type: string
+        location:
+          type: string
+      required:
+        - fullname
+        - phone
+        - detail
+        - location
+    Shipment-Product-Create:
+      title: Shipment-Product-Create
+      type: object
+      x-tags:
+        - Models
+      properties:
+        translatedName:
+          type: string
+        productUrl:
+          type: string
+        productImage:
+          type: string
+        name:
+          type: string
+        merchantName:
+          type: string
+        merchantContact:
+          type: string
+        quantity:
+          type: integer
+        unitPrice:
+          type: number
+      required:
+        - name
+        - quantity
+        - unitPrice
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  requestBodies:
+    Customer-Address-Create:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fullname:
+                type: string
+              phone:
+                type: string
+              detail:
+                type: string
+              location:
+                type: string
+              note:
+                type: string
+              defaultAddress:
+                type: string
+              addressName:
+                type: string
+            required:
+              - fullname
+              - phone
+              - detail
+              - location
+      description: Tạo địa chỉ của khách hàng
+    Shipment-Product-Create:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              productUrl:
+                type: string
+              name:
+                type: string
+              translatedName:
+                type: string
+              merchantName:
+                type: string
+              merchantContact:
+                type: string
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+              shortName:
+                type: string
+              shortTranslatedName:
+                type: string
+              unit:
+                type: string
+              translatedUnit:
+                type: string
+              brand:
+                type: string
+              originalBrand:
+                type: string
+              material:
+                type: string
+              originalMaterial:
+                type: string
+              receivedQuantity:
+                type: integer
+              variantProperties:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                    originalValue:
+                      type: string
+                    name:
+                      type: string
+                    originalName:
+                      type: string
+            required:
+              - productUrl
+              - name
+              - translatedName
+              - quantity
+              - unitPrice
+      description: Tạo sản phẩm trên đơn ký gửi
 tags:
   - name: Tenant
   - name: Draft-Shipment
@@ -3256,6 +3477,6 @@ tags:
   - name: Shipment
     description: 'Bao gồm những API cho phép thêm, sửa đơn hàng ký gửi. Bên cạnh đó sẽ có những API của các thông tin thuộc đơn ký gửi đó là: Các API thêm xóa mã vận đơn, thêm sửa xóa sản phẩm trong đơn ký gửi.'
   - name: Category
-    description: "API lấy các danh mục"
+    description: API lấy các danh mục
   - name: Customer
     description: Gồm các API liên quan đến thông tin của khách hàng.
