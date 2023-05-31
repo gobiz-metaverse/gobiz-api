@@ -1,0 +1,140 @@
+openapi: 3.0.0
+x-stoplight:
+  id: t1lcpe2l0q9z5
+info:
+  title: gobiz-internal-api
+  version: '1.0'
+servers:
+  - url: 'https://baogam.order.gobizdev.com'
+  - url: 'https://ongvang.order.gobizdev.com'
+paths:
+  '/api/internal/orders/{code}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: code
+        in: path
+        required: true
+        description: mã đơn
+    post:
+      summary: ''
+      operationId: order-comment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentView'
+      description: Comment trên đơn thường
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  x-stoplight:
+                    id: 8xoymt8k54q2n
+                  description: nội dung
+                author:
+                  type: string
+                  x-stoplight:
+                    id: 2wqwdobpstyxh
+                  description: người gửi
+                attachments:
+                  type: string
+                  x-stoplight:
+                    id: hsjd64qv6zi75
+                  format: binary
+                  description: file đính kèm
+              required:
+                - author
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Tenant
+          required: true
+          description: tenant code
+  '/api/internal/shipments/{code}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: code
+        in: path
+        required: true
+        description: mã đơn ký gửi
+    post:
+      summary: ''
+      operationId: shipment-comment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentView'
+      description: comment trên đơn ký gửi
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Tenant
+          description: tenant code
+          required: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                  x-stoplight:
+                    id: 6fi4rajw5i92m
+                  description: người gửi
+                content:
+                  type: string
+                  x-stoplight:
+                    id: rpiuvpomm3vhq
+                  description: nội dung
+                attachments:
+                  type: string
+                  x-stoplight:
+                    id: s323y53la440u
+                  format: binary
+                  description: đính kèm
+              required:
+                - author
+components:
+  schemas:
+    CommentView:
+      title: InternalCommentView
+      x-stoplight:
+        id: 7ab3728500d65
+      type: object
+      x-examples:
+        Alice Smith:
+          id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ilj9zbxr293bs
+        content:
+          type: string
+          x-stoplight:
+            id: 1py9612ky75r0
+        timestamp:
+          type: string
+          x-stoplight:
+            id: 7xn3r2zv69pf6

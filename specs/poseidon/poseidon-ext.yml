@@ -1,0 +1,227 @@
+openapi: 3.0.3
+x-stoplight:
+  id: y4279u130faae
+info:
+  license:
+    name: Gobiz Li-xăng
+    url: 'https://gobiz.vn'
+  description: |
+    API của Poseidon  
+    Dành cho device client.
+  version: 1.0.0
+  title: Poseidon API
+  contact:
+    email: developer@gobiz.vn
+    name: Developer Gobiz
+    url: 'https://gobiz.vn'
+  termsOfService: 'https://gobiz.vn'
+servers:
+  - description: Báo Gấm (Dev)
+    url: 'https://baogam.order.gobizdev.com/api/external'
+  - url: 'https://ongvang.order.gobizdev.com/api/external'
+    description: Ong Vàng (Staging)
+tags:
+  - name: cam-do
+    description: Các API cho dự án cầm đồ
+  - name: cam-do-tth
+    description: Cầm đồ - Thanh Toán Hộ
+paths:
+  /shopkeeper/order_credits/approve:
+    post:
+      summary: ''
+      operationId: order-credit-approve
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCredit'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorProblem'
+              examples:
+                Example 1:
+                  value:
+                    title: invalid_client_id
+                    status: 400
+                    detail: Invalid client id
+                Example 2:
+                  value:
+                    title: action_do_not_allow
+                    status: 400
+                    detail: You can not perform this action
+                Example 3:
+                  value:
+                    title: order_credit_do_not_exists
+                    status: 400
+                    detail: Order credit do not exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopkeeperApproveCommand'
+      description: Xác nhận khoản vay
+      tags:
+        - cam-do
+    parameters: []
+  /shopkeeper/order_credits/reject:
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCredit'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorProblem'
+              examples:
+                Example 1:
+                  value:
+                    title: invalid_client_id
+                    status: 400
+                    detail: Invalid client id
+                Example 2:
+                  value:
+                    title: action_do_not_allow
+                    status: 400
+                    detail: You can not perform this action
+                Example 3:
+                  value:
+                    title: order_not_found
+                    status: 400
+                    detail: 'Can not found order with code ${orderCode}'
+                Example 4:
+                  value:
+                    title: order_credit_do_not_exists
+                    status: 400
+                    detail: Order credit do not exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShopkeeperApproveCommand'
+      operationId: order-credit-reject
+      description: Từ chối khoản vay
+      tags:
+        - cam-do
+    parameters: []
+  /shopkeeper/peer_payments_credits/approve:
+    post:
+      summary: approve
+      tags:
+        - cam-do-tth
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeerPaymentCredit'
+      operationId: peer-payment-credit-approve
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeerPaymentCreditApproveCommand'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+      description: Xác nhận khoản vay
+  /shopkeeper/peer_payments_credits/reject:
+    post:
+      summary: reject
+      tags:
+        - cam-do-tth
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeerPaymentCredit'
+      operationId: peer-payment-credit-reject
+      description: Từ chối khoản vay
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeerPaymentCreditApproveCommand'
+components:
+  schemas:
+    ShopkeeperApproveCommand:
+      type: object
+      x-stoplight:
+        id: d8839c47c69c5
+      title: ShopkeeperApproveCommand
+      properties:
+        loanId:
+          type: string
+        orderCode:
+          type: string
+      required:
+        - loanId
+        - orderCode
+    OrderCredit:
+      type: object
+      x-stoplight:
+        id: d2ed363cfdaf0
+      title: OrderCredit
+      properties:
+        id:
+          type: string
+    PeerPaymentCredit:
+      type: object
+      x-stoplight:
+        id: wnw77zs13uxu0
+      title: PeerPaymentCredit
+      properties:
+        id:
+          type: string
+    ErrorProblem:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+      description: Lỗi trả về
+    PeerPaymentCreditApproveCommand:
+      title: PeerPaymentCreditApproveCommand
+      x-stoplight:
+        id: yej20lf52ieen
+      type: object
+      properties:
+        loanId:
+          type: string
+          x-stoplight:
+            id: w10g4r18rzepz
+        peerPaymentCode:
+          type: string
+          x-stoplight:
+            id: ogz75vdcyatpa
+      required:
+        - loanId
+        - peerPaymentCode
+  securitySchemes:
+    bearerAuth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://baogam.order.gobizdev.com/oauth/token'
+          scopes:
+            all: ''
+security:
+  - bearerAuth: []

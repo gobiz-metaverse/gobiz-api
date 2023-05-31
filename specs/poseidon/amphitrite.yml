@@ -1,0 +1,2301 @@
+openapi: 3.0.0
+info:
+  license:
+    name: Gobiz Li-xăng
+    url: 'https://gobiz.vn'
+  description: |
+    API của Poseidon  
+    Dành cho device client.
+  version: 1.0.0
+  title: Poseidon API
+  contact:
+    email: developer@gobiz.vn
+    name: Developer Gobiz
+    url: 'https://gobiz.vn'
+  termsOfService: 'https://gobiz.vn'
+servers:
+  - description: Báo Gấm
+    url: 'https://baogam.order.gobizdev.com'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    CartMerchantView:
+      title: CartMerchantView
+      x-stoplight:
+        id: bu6xmuaz8t96h
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: qolmaqem9oc02
+        name:
+          type: string
+          x-stoplight:
+            id: b5w5mdz0zpd5y
+        url:
+          type: string
+          x-stoplight:
+            id: ijsrd2cty47zc
+        remark:
+          type: string
+          x-stoplight:
+            id: vda1bc4cabxtq
+        note:
+          type: string
+          x-stoplight:
+            id: bws6rwiqlsmni
+        totalValue:
+          type: number
+          x-stoplight:
+            id: 7yu3fbq96pimg
+        totalFee:
+          type: number
+          x-stoplight:
+            id: ghqjyq84aq089
+        exchangedTotalValue:
+          type: number
+          x-stoplight:
+            id: v1e8rclw5qi2t
+        grandTotal:
+          type: number
+          x-stoplight:
+            id: c09l32y5ct59l
+        marketplace:
+          $ref: '#/components/schemas/MarketplaceView'
+          x-stoplight:
+            id: 6jj0o6a4mj1gw
+        contact:
+          type: object
+          x-stoplight:
+            id: ts6r3qggjtz1x
+        products:
+          x-stoplight:
+            id: 53z1gq8e9bwuu
+          type: array
+          items:
+            $ref: '#/components/schemas/CartProductView'
+        services:
+          x-stoplight:
+            id: 8q0bnq171jbqv
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderServiceView'
+            x-stoplight:
+              id: zqftbpeng7tqc
+    MarketplaceView:
+      title: MarketplaceView
+      x-stoplight:
+        id: 8hlb5t4bepeyq
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+          x-stoplight:
+            id: 48cgrb553x0vx
+        name:
+          type: string
+          x-stoplight:
+            id: 9grq8nm6y8q97
+        description:
+          type: string
+          x-stoplight:
+            id: s3suedheohbc7
+        image:
+          type: string
+          x-stoplight:
+            id: adwzoc5g93wys
+        url:
+          type: string
+          x-stoplight:
+            id: itml1nf641h84
+        currency:
+          type: string
+          x-stoplight:
+            id: gu8fi8o1w6ntn
+        orderValueThreshold:
+          type: number
+          x-stoplight:
+            id: h538kod1cai37
+    CartProductView:
+      title: CartProductView
+      x-stoplight:
+        id: rankmfl8m4s5c
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: tzjkdfex3aknh
+        merchant:
+          $ref: '#/components/schemas/CartMerchantView'
+        originalId:
+          type: string
+          x-stoplight:
+            id: uqw9xul5hdbf6
+        originalName:
+          type: string
+          x-stoplight:
+            id: q56t671rbj4hx
+        image:
+          type: string
+          x-stoplight:
+            id: x9q6na83dwxpe
+        name:
+          type: string
+          x-stoplight:
+            id: i6xmxa4752jrv
+        url:
+          type: string
+          x-stoplight:
+            id: mrk1j1ez49tcp
+        batchSize:
+          type: number
+          x-stoplight:
+            id: ap78r7a8grsx6
+        minQuantity:
+          type: number
+          x-stoplight:
+            id: 7l0v92itg2hut
+        skus:
+          x-stoplight:
+            id: 0khjxernyparv
+          type: array
+          items:
+            $ref: '#/components/schemas/CartSkuView'
+    SimpleVariantPropertiesView:
+      title: SimpleVariantPropertiesView
+      x-stoplight:
+        id: 1b1dsbdbguanc
+      type: object
+      properties:
+        id:
+          type: string
+        originalName:
+          type: string
+          x-stoplight:
+            id: 4rleoiz3bgmsg
+        name:
+          type: string
+          x-stoplight:
+            id: pv0c4zlztx5uv
+        originalValue:
+          type: string
+          x-stoplight:
+            id: 63pb4ge2n50ok
+        value:
+          type: string
+          x-stoplight:
+            id: ohgynq2hggl7k
+    CartSkuView:
+      title: CartSkuView
+      x-stoplight:
+        id: uda6alqrv4egs
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: aqsiihih39vq2
+        variantProperties:
+          $ref: '#/components/schemas/SimpleVariantPropertiesView'
+          x-stoplight:
+            id: glsrw8u8useax
+        image:
+          type: string
+          x-stoplight:
+            id: 77mnru09rc44a
+        product:
+          $ref: '#/components/schemas/CartProductView'
+        remark:
+          type: string
+          x-stoplight:
+            id: aqdei3q5j98t0
+        note:
+          type: string
+          x-stoplight:
+            id: fckkba4dahhvj
+        currency:
+          type: string
+          x-stoplight:
+            id: 8h7ohla2nudfh
+        quantity:
+          type: integer
+          x-stoplight:
+            id: tiwebx601oe7e
+        stock:
+          type: integer
+          x-stoplight:
+            id: vp70brlgo0t1v
+        originalPrice:
+          type: number
+          x-stoplight:
+            id: p8x8rvb4o1y2o
+        exchangedOriginalPrice:
+          type: number
+          x-stoplight:
+            id: s03k09mbuzdqi
+        salePrice:
+          type: number
+          x-stoplight:
+            id: dcyqrfggj6ql7
+        bargainPrice:
+          type: number
+          x-stoplight:
+            id: p2vpq8noduvkg
+        exchangedBargainPrice:
+          type: number
+          x-stoplight:
+            id: zu9080ikdig8c
+        exchangedSalePrice:
+          type: number
+          x-stoplight:
+            id: mnhnlsslb1xt1
+        totalAmount:
+          type: number
+          x-stoplight:
+            id: i0wt47hbk7vl4
+        exchangedTotalAmount:
+          type: number
+          x-stoplight:
+            id: hvxqztzjffqo9
+        pricePolicy:
+          $ref: '#/components/schemas/SimplePricePolicyView'
+          x-stoplight:
+            id: l5dd636i7e39u
+        timestamp:
+          type: string
+          x-stoplight:
+            id: phcnspwf01fxo
+    SimplePricePolicyView:
+      title: SimplePricePolicyView
+      x-stoplight:
+        id: 87b3v49vu5rds
+      type: object
+      properties:
+        min:
+          type: number
+          x-stoplight:
+            id: p5equhoz1h5kj
+        max:
+          type: number
+          x-stoplight:
+            id: 705bnhe0vd0u6
+        originalPrice:
+          type: number
+          x-stoplight:
+            id: pumgtqrdzz4sa
+        salePrice:
+          type: number
+          x-stoplight:
+            id: 0ru0scuxm8xuz
+        currency:
+          type: string
+          x-stoplight:
+            id: fo705yjf088v1
+      required:
+        - originalPrice
+        - salePrice
+        - currency
+    OrderServiceView:
+      title: OrderServiceView
+      x-stoplight:
+        id: qtwo6xfb8ucbs
+      type: object
+      properties:
+        code:
+          type: string
+          x-stoplight:
+            id: 0e0bvysubfcm6
+        name:
+          type: string
+          x-stoplight:
+            id: i47sq0h9r7sxn
+        description:
+          type: string
+          x-stoplight:
+            id: 92ja5loh83o6r
+        position:
+          type: string
+          x-stoplight:
+            id: evcgtuoikti5p
+        requires:
+          type: array
+          x-stoplight:
+            id: 8cksra8tayo7h
+          items:
+            x-stoplight:
+              id: 5r52zkw2dfikh
+            type: string
+        dependencies:
+          type: array
+          x-stoplight:
+            id: ivct6f8p4cu4o
+          items:
+            x-stoplight:
+              id: 6ul4gogy2bupr
+            type: string
+        excludes:
+          type: array
+          x-stoplight:
+            id: tjrrapmjgae4z
+          items:
+            x-stoplight:
+              id: cjzvoird4gqkm
+            type: string
+        serviceGroup:
+          $ref: '#/components/schemas/ServiceGroupView'
+          x-stoplight:
+            id: gr2qnpxvilpu2
+        shippingClass:
+          $ref: '#/components/schemas/ShippingClassView'
+          x-stoplight:
+            id: j6xkwa2budnnp
+        defaultApplied:
+          type: boolean
+          x-stoplight:
+            id: uwnk0jhb996c1
+        needApprove:
+          type: boolean
+          x-stoplight:
+            id: 472bsy0pyu2cy
+        shipping:
+          type: boolean
+          x-stoplight:
+            id: dzudql6ymura4
+        approved:
+          type: boolean
+          x-stoplight:
+            id: mgovn6dt2ih79
+        serviceInfo:
+          type: string
+          x-stoplight:
+            id: 2iqtqbk3cohlc
+        language:
+          type: object
+          x-stoplight:
+            id: 8jp16x3smf2zy
+        alias:
+          type: string
+          x-stoplight:
+            id: 2c6n8u8e06j9v
+        dimensionWeightConversion:
+          type: number
+          x-stoplight:
+            id: 4x5qcia8uhfan
+        requireGroups:
+          type: array
+          x-stoplight:
+            id: 654munzvoffgm
+          items:
+            x-stoplight:
+              id: ye9hqxjrz3gul
+            type: string
+        excludeGroups:
+          type: array
+          x-stoplight:
+            id: xcjjk799tlr4j
+          items:
+            x-stoplight:
+              id: y8z62tns8jjts
+            type: string
+        onlyStaff:
+          type: boolean
+          x-stoplight:
+            id: tuyt8undqljwn
+    AddToCartCommand:
+      title: AddToCartCommand
+      x-stoplight:
+        id: ho741ydjoqrin
+      type: object
+      properties:
+        originalId:
+          type: string
+          x-stoplight:
+            id: urqd8c6efju1p
+        name:
+          type: string
+          x-stoplight:
+            id: g40i3669ist8c
+        originalName:
+          type: string
+          x-stoplight:
+            id: dg6blmuaesmby
+        image:
+          type: string
+          x-stoplight:
+            id: 9uqwle1bem2u1
+        url:
+          type: string
+          x-stoplight:
+            id: rdfw88irrx22y
+        variantProperties:
+          type: array
+          x-stoplight:
+            id: eg7k1od5r3vkt
+          items:
+            $ref: '#/components/schemas/VariantProperty'
+            x-stoplight:
+              id: bgeul1jxafkl9
+        variantImage:
+          type: string
+          x-stoplight:
+            id: gvgdu4uy5ctfq
+        stock:
+          type: integer
+          x-stoplight:
+            id: 1nhtkjky8gb71
+        quantity:
+          type: integer
+          x-stoplight:
+            id: b0y7xn4irdlk2
+        unit:
+          type: string
+          x-stoplight:
+            id: mgptomgzef1e4
+        originalPrice:
+          type: number
+          x-stoplight:
+            id: rysa182fucj7y
+        salePrice:
+          type: number
+          x-stoplight:
+            id: 9un2l3pd9h043
+        currency:
+          type: string
+          x-stoplight:
+            id: 9fsi9i9jbjs77
+        batchSize:
+          type: integer
+          x-stoplight:
+            id: 06x57mhy7g56z
+        minQuantity:
+          type: integer
+          x-stoplight:
+            id: qbk0d8hqwtb1l
+        pricePolicy:
+          type: array
+          x-stoplight:
+            id: ydm51eyq9kr14
+          items:
+            $ref: '#/components/schemas/SimplePricePolicyView'
+            x-stoplight:
+              id: 58c9g3j9u1gt9
+        skuId:
+          type: string
+          x-stoplight:
+            id: d8ry88jtvzwaw
+        specId:
+          type: string
+          x-stoplight:
+            id: zwprkdpbaqrcr
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+          x-stoplight:
+            id: 2mx72luuajws0
+      required:
+        - originalId
+        - originalPrice
+        - salePrice
+        - currency
+        - merchant
+    VariantProperty:
+      title: VariantProperty
+      x-stoplight:
+        id: n0x41ql932b60
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: un76rv8ha8lpg
+        originalName:
+          type: string
+          x-stoplight:
+            id: 639qcfm3ind2w
+        value:
+          type: string
+          x-stoplight:
+            id: ot6jc4b739xo9
+        originalValue:
+          type: string
+          x-stoplight:
+            id: pnxealgfqoamw
+      required:
+        - id
+        - name
+        - originalValue
+    BadRequestProblem:
+      title: BadRequestProblem
+      x-stoplight:
+        id: yveddseo99dpb
+      type: object
+      properties:
+        title:
+          type: string
+          x-stoplight:
+            id: r38a84py2qj77
+        detail:
+          type: string
+          x-stoplight:
+            id: j84sx59r6z8gp
+        status:
+          type: number
+          x-stoplight:
+            id: 979lp5fhtgi4q
+    Merchant:
+      title: Merchant
+      x-stoplight:
+        id: 5w1d9axqm5x8h
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 7fn6yh6cvxstc
+        marketplace:
+          type: string
+          x-stoplight:
+            id: 5eovmlwrgajeq
+        url:
+          type: string
+          x-stoplight:
+            id: vupbjbqyfkort
+        contacts:
+          type: object
+          x-stoplight:
+            id: gtujf823i21kq
+      required:
+        - id
+        - name
+        - marketplace
+    ServiceGroupView:
+      title: ServiceGroupView
+      x-stoplight:
+        id: ny5w3nw7k0ihi
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: 47b5f6j0obno5
+        name:
+          type: string
+          x-stoplight:
+            id: ai9uv2aio4mr2
+        description:
+          type: string
+          x-stoplight:
+            id: trn17ipeobzby
+        position:
+          type: string
+          x-stoplight:
+            id: t6pxxt0g22d4u
+        single:
+          type: boolean
+          x-stoplight:
+            id: 7q4m7fgy2n20k
+        required:
+          type: boolean
+          x-stoplight:
+            id: 5xdsnrjgl9wcq
+        language:
+          type: object
+          x-stoplight:
+            id: xa883t60zgw43
+    ShippingClassView:
+      title: ShippingClassView
+      x-stoplight:
+        id: 8mr32cer2lnf2
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: 46kgbynty5d50
+        name:
+          type: string
+          x-stoplight:
+            id: b5h8hxsqv0rjq
+        description:
+          type: string
+          x-stoplight:
+            id: sdn23y6k51u2h
+        position:
+          type: string
+          x-stoplight:
+            id: 05rem81j3zqry
+        calculatedByFormula:
+          type: boolean
+          x-stoplight:
+            id: 12dgohuujiy43
+        preferredWarehouse:
+          $ref: '#/components/schemas/WarehouseView'
+          x-stoplight:
+            id: 417u9bpnh67ku
+        language:
+          type: object
+          x-stoplight:
+            id: s8pq8761f8kzy
+    WarehouseView:
+      title: WarehouseView
+      x-stoplight:
+        id: yksctjf2x27vz
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: cgkcetd62zk7h
+        name:
+          type: string
+          x-stoplight:
+            id: 9iv9xo53jkm36
+        description:
+          type: string
+          x-stoplight:
+            id: bmko41fhs5i8x
+        displayName:
+          type: string
+          x-stoplight:
+            id: upco8f283qr1e
+        position:
+          type: number
+          x-stoplight:
+            id: c248jyss3g53z
+        location:
+          $ref: '#/components/schemas/LocationView'
+          x-stoplight:
+            id: ndbopoaeia80n
+        enabled:
+          type: boolean
+          x-stoplight:
+            id: jpeowrih9qf2d
+        delivered:
+          type: boolean
+          x-stoplight:
+            id: 5u5oy0ymgn0sz
+        received:
+          type: boolean
+          x-stoplight:
+            id: ntztmgn48txr3
+        address:
+          type: string
+          x-stoplight:
+            id: 4lb8y53eph7ve
+        recipientName:
+          type: string
+          x-stoplight:
+            id: m3x700gltjbk5
+        recipientAddress:
+          type: string
+          x-stoplight:
+            id: g9t356q41or67
+        recipientPhone:
+          type: string
+          x-stoplight:
+            id: lpt456ga4ltol
+        recipientLocations:
+          type: array
+          x-stoplight:
+            id: cbl74vddha6e2
+          items:
+            $ref: '#/components/schemas/ReceiptLocation'
+            x-stoplight:
+              id: 4fldk9agdbsva
+        isDefault:
+          type: string
+          x-stoplight:
+            id: 7pcgx0n9h0i90
+    LocationView:
+      title: LocationView
+      x-stoplight:
+        id: buyo0kg31jhui
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+          x-stoplight:
+            id: krk8ymw317ne7
+        name:
+          type: string
+          x-stoplight:
+            id: 798cvxu04xgkw
+        description:
+          type: string
+          x-stoplight:
+            id: om1jgi6j7tl5o
+        display:
+          type: string
+          x-stoplight:
+            id: 3k2ftkjgau56c
+        position:
+          type: number
+          x-stoplight:
+            id: 0pcri8yrmw5i8
+        type:
+          type: string
+          x-stoplight:
+            id: mh812m5hjyl6r
+        parent:
+          $ref: '#/components/schemas/LocationView'
+    ReceiptLocation:
+      title: ReceiptLocation
+      x-stoplight:
+        id: 0u9d61vleyt7i
+      type: object
+      properties:
+        marketplace:
+          type: string
+          x-stoplight:
+            id: hfg5wan0b0m0l
+        province:
+          type: string
+          x-stoplight:
+            id: qkjqs7v9f2ths
+        city:
+          type: string
+          x-stoplight:
+            id: 61n6g3p4hjpcb
+        district:
+          type: string
+          x-stoplight:
+            id: 1jmuro2pzn0xe
+        ward:
+          type: string
+          x-stoplight:
+            id: xg4iufqixm3oa
+        village:
+          type: string
+          x-stoplight:
+            id: x8drne3ehlifj
+    CustomerRegisterCommand:
+      title: CustomerRegisterCommand
+      x-stoplight:
+        id: pghklenrlbjke
+      type: object
+      description: 'đăng ký '
+      properties:
+        username:
+          type: string
+          x-stoplight:
+            id: e75o188jlicez
+        fullname:
+          type: string
+          x-stoplight:
+            id: ttd131eu5h9r1
+        email:
+          type: string
+          x-stoplight:
+            id: n3xx6fchdxoao
+        password:
+          type: string
+          x-stoplight:
+            id: 8ecbq4chl4r0l
+        ref:
+          type: string
+          x-stoplight:
+            id: oqfccxwys5xzr
+        phone:
+          type: string
+          x-stoplight:
+            id: w1c63yvfbn0cy
+      required:
+        - username
+        - fullname
+        - email
+        - password
+    CustomerView:
+      title: CustomerView
+      x-stoplight:
+        id: 3gqruwzix0x2v
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+          x-stoplight:
+            id: to982nva6zm7m
+        email:
+          type: string
+          x-stoplight:
+            id: srmqmb7uaabxn
+        fullname:
+          type: string
+          x-stoplight:
+            id: 5vesgglfjmsl8
+        gender:
+          type: string
+          x-stoplight:
+            id: bm4anwuokjwbf
+      description: customer view
+    CustomerOrderView:
+      title: CustomerOrderView
+      x-stoplight:
+        id: a2dwqikapmu6v
+      type: object
+      properties:
+        id:
+          type: integer
+        timestamp:
+          type: string
+          x-stoplight:
+            id: pawmzkkog3nfn
+        code:
+          type: string
+          x-stoplight:
+            id: folfmzwiijnps
+        customer:
+          $ref: '#/components/schemas/SimpleCustomerView'
+          x-stoplight:
+            id: jbay79qn5c1kp
+        emdAmount:
+          type: number
+          x-stoplight:
+            id: cewemrjr2oo9c
+        provisionalAmount:
+          type: number
+          x-stoplight:
+            id: kthkkuxt3eruo
+        status:
+          type: string
+          x-stoplight:
+            id: 35gzk0owrcmtl
+        lastStatusTime:
+          type: string
+          x-stoplight:
+            id: 19zlr0bet4qhq
+        marketplace:
+          $ref: '#/components/schemas/SimpleMarketplaceView'
+          x-stoplight:
+            id: bfvwa13aqq48z
+        remark:
+          type: string
+          x-stoplight:
+            id: znrb6off9st5i
+        note:
+          type: string
+          x-stoplight:
+            id: mr5x12l6oneq1
+        merchantContacts:
+          type: object
+          x-stoplight:
+            id: ah36ldw6fjvwl
+        merchantCode:
+          type: string
+          x-stoplight:
+            id: w8r6i1vnul1vu
+        merchantName:
+          type: string
+          x-stoplight:
+            id: xcheocq48l070
+        merchantUrl:
+          type: string
+          x-stoplight:
+            id: o1cuu9oog6ebe
+        services:
+          type: array
+          x-stoplight:
+            id: 0tk02623m118j
+          items:
+            $ref: '#/components/schemas/OrderServiceView'
+            x-stoplight:
+              id: 53of0du8wgonf
+        address:
+          $ref: '#/components/schemas/OrderAddressView'
+          x-stoplight:
+            id: qvr1ziklu51x9
+        image:
+          type: string
+          x-stoplight:
+            id: 4tpdezmhpc74d
+        emdPercent:
+          type: number
+          x-stoplight:
+            id: ca54iocuno1l9
+        products:
+          x-stoplight:
+            id: otdpmxcflucr5
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerOrderProductView'
+            x-stoplight:
+              id: 366r97nx79mgz
+        financials:
+          type: array
+          x-stoplight:
+            id: zoals255o7847
+          items:
+            $ref: '#/components/schemas/OrderFinancialView'
+            x-stoplight:
+              id: n43stryxtvk8o
+        fees:
+          type: array
+          x-stoplight:
+            id: nhepaogzi8k7n
+          items:
+            $ref: '#/components/schemas/OrderFeeView'
+            x-stoplight:
+              id: 50s24eweh4dqy
+        purchasingStaff:
+          $ref: '#/components/schemas/SimpleStaffView'
+          x-stoplight:
+            id: 4dkf5avs7rs2r
+        purchasingAccount:
+          $ref: '#/components/schemas/SimplePurchasingAccountView'
+          x-stoplight:
+            id: kuqk6swpkav6b
+        receivingWarehouse:
+          $ref: '#/components/schemas/WarehouseView'
+          x-stoplight:
+            id: 6svzeuz25mq4f
+        deliveryWarehouse:
+          $ref: '#/components/schemas/WarehouseView'
+          x-stoplight:
+            id: 0p62m9b6tj48n
+        totalValue:
+          type: number
+          x-stoplight:
+            id: 3z47a7zcifxgm
+        orderedQuantity:
+          type: integer
+          x-stoplight:
+            id: xomnihfas3bxe
+        purchasedQuantity:
+          type: integer
+          x-stoplight:
+            id: b4v55jfmdy7zk
+        receivedQuantity:
+          type: integer
+          x-stoplight:
+            id: 6vmlnxspmcbi5
+        exchangeRate:
+          type: number
+          x-stoplight:
+            id: 9a81rw2o85hdm
+        actualWeight:
+          type: number
+          x-stoplight:
+            id: c3p6qsg6dyvr9
+        volumetric:
+          type: number
+          x-stoplight:
+            id: 3apj2r5vazxwu
+        dimensionalWeight:
+          type: number
+          x-stoplight:
+            id: gvenqi35bdxx5
+        netWeight:
+          type: number
+          x-stoplight:
+            id: kmbdmszpk56d2
+        packagingWeight:
+          type: number
+          x-stoplight:
+            id: nzy88le484slt
+        availablePackageCount:
+          type: integer
+          x-stoplight:
+            id: dozbp706k893g
+        deliveryNotice:
+          type: boolean
+          x-stoplight:
+            id: v1db0i4a1bzut
+        totalFee:
+          type: number
+          x-stoplight:
+            id: 9e9dyo1lpjm6k
+        totalPaid:
+          type: number
+          x-stoplight:
+            id: fonoynttlxauo
+        totalRefund:
+          type: number
+          x-stoplight:
+            id: b1xh7naoirhix
+        totalClaim:
+          type: number
+          x-stoplight:
+            id: 231ifga9ur0ia
+        totalCollect:
+          type: number
+          x-stoplight:
+            id: h619mjlc4tvt6
+        totalCoupon:
+          type: number
+          x-stoplight:
+            id: r3xvx8fp5kkvc
+        merchantShippingCost:
+          type: number
+          x-stoplight:
+            id: jdne3qdooq4eo
+        totalUnpaid:
+          type: number
+          x-stoplight:
+            id: 3kjupw9s1ped1
+        cogsAmount:
+          type: number
+          x-stoplight:
+            id: 50syc8h2nzovf
+        grandTotal:
+          type: number
+          x-stoplight:
+            id: h4fd5qu8v9rtk
+        exchangedTotalValue:
+          type: number
+          x-stoplight:
+            id: i4wrwowq8j01u
+        exchangedDiscountAmount:
+          type: number
+          x-stoplight:
+            id: frtxxur302m2e
+        exchangedMerchantShippingCost:
+          type: number
+          x-stoplight:
+            id: 2m956nkyil2ay
+        archived:
+          type: boolean
+          x-stoplight:
+            id: 21t1lfwctg9wt
+        lastUpdated:
+          type: string
+          x-stoplight:
+            id: bs22uszt3oggs
+        seed:
+          type: string
+          x-stoplight:
+            id: ezsve4tp81red
+        configGroupId:
+          type: string
+          x-stoplight:
+            id: 1omboksvdq8op
+        customerDiscountId:
+          type: string
+          x-stoplight:
+            id: wpprpaajsyte3
+        customerLevelId:
+          type: string
+          x-stoplight:
+            id: qr1j6ny33r4o1
+        customerGroup:
+          $ref: '#/components/schemas/CustomerGroupView'
+          x-stoplight:
+            id: qxd8frtcn3ggc
+        currency:
+          type: string
+          x-stoplight:
+            id: lw63lfq95vacs
+        discountAmount:
+          type: number
+          x-stoplight:
+            id: l7pg4ifd467jw
+        orderPurchase:
+          $ref: '#/components/schemas/OrderPurchaseView'
+          x-stoplight:
+            id: 3qcnve4zol5tt
+        contractWithShopkeeper:
+          type: boolean
+          x-stoplight:
+            id: 8kptbn4cp1gqs
+    CustomerOrderCreateCommand:
+      title: CustomerOrderCreateCommand
+      x-stoplight:
+        id: h05x164ewrqc7
+      type: object
+      properties:
+        draftOrder:
+          type: string
+          x-stoplight:
+            id: xxtohzq2zrnn0
+          description: draft order id
+        password:
+          type: string
+          x-stoplight:
+            id: glkpyhubciqzs
+      required:
+        - draftOrder
+    SimpleCustomerView:
+      title: SimpleCustomerView
+      x-stoplight:
+        id: 2u36dgzspurwa
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+          x-stoplight:
+            id: 0akqpbav6dpmg
+        email:
+          type: string
+          x-stoplight:
+            id: q0zhg0t4lb0no
+        fullname:
+          type: string
+          x-stoplight:
+            id: fwra10k6fmmts
+        nickname:
+          type: string
+          x-stoplight:
+            id: 6azdkoz0synh6
+        avatar:
+          type: string
+          x-stoplight:
+            id: mneqoqd38r6sn
+        phone:
+          type: string
+          x-stoplight:
+            id: cb6lry1zljc6e
+        code:
+          type: string
+          x-stoplight:
+            id: b1v37asd9ue9m
+        dob:
+          type: string
+          x-stoplight:
+            id: 7ex5dl9370wwj
+        contactAddress:
+          type: string
+          x-stoplight:
+            id: tko2gt0yhg3d8
+        gender:
+          type: string
+          x-stoplight:
+            id: xl1ms5j0vnkgr
+        customerStatus:
+          type: string
+          x-stoplight:
+            id: s6i7slnm29yx0
+        customerGroup:
+          $ref: '#/components/schemas/CustomerGroupView'
+          x-stoplight:
+            id: qkyuht6upzhju
+        customerLevel:
+          $ref: '#/components/schemas/CustomerLevelView'
+          x-stoplight:
+            id: u4yt3d5vabwkf
+        rewardPoint:
+          type: number
+          x-stoplight:
+            id: 9n7se4s562doi
+        customerAuthorities:
+          $ref: '#/components/schemas/CustomerAuthorities'
+          x-stoplight:
+            id: 4kp50m8wu3h26
+        zaloId:
+          type: string
+          x-stoplight:
+            id: 53nuskj158p2i
+        token:
+          $ref: '#/components/schemas/CustomerAccessTokenView'
+          x-stoplight:
+            id: f07hgcx402q32
+        peerPaymentConfigGroupId:
+          type: string
+          x-stoplight:
+            id: 9ixos5cm71vjn
+    SimpleMarketplaceView:
+      title: SimpleMarketplaceView
+      x-stoplight:
+        id: w1ay02zw3g714
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+          x-stoplight:
+            id: 7qa173nofksft
+        name:
+          type: string
+          x-stoplight:
+            id: pg8gy5u5v2n34
+        description:
+          type: string
+          x-stoplight:
+            id: pmyc8eala222o
+        image:
+          type: string
+          x-stoplight:
+            id: uv9p1x2bslc51
+        url:
+          type: string
+          x-stoplight:
+            id: nc8a836owas9f
+        currency:
+          type: string
+          x-stoplight:
+            id: r0q5ir83e2mhx
+        orderValueThreshold:
+          type: number
+          x-stoplight:
+            id: 1qdv6fnl13kg9
+    OrderAddressView:
+      title: OrderAddressView
+      x-stoplight:
+        id: 9ax779r79srzr
+      type: object
+      properties:
+        id:
+          type: integer
+        phone:
+          type: string
+          x-stoplight:
+            id: io3c25bj4z8mw
+        detail:
+          type: string
+          x-stoplight:
+            id: s7iygzs9bjlh5
+        location:
+          $ref: '#/components/schemas/LocationView'
+          x-stoplight:
+            id: 83kc989v8z10k
+        note:
+          type: string
+          x-stoplight:
+            id: rcm9tjyivsrou
+        fullname:
+          type: string
+          x-stoplight:
+            id: 2jqrm2igy01tj
+    CustomerOrderProductView:
+      title: CustomerOrderProductView
+      x-stoplight:
+        id: 8b64wyjj4hvfx
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+          x-stoplight:
+            id: v63toh78t3e68
+        originalId:
+          type: string
+          x-stoplight:
+            id: 7kmqclnw993vm
+        originalName:
+          type: string
+          x-stoplight:
+            id: 3xkphpycquz7m
+        name:
+          type: string
+          x-stoplight:
+            id: 9diwoime8qg9a
+        shortName:
+          type: string
+          x-stoplight:
+            id: sxiq5t4lurh93
+        shortTranslatedName:
+          type: string
+          x-stoplight:
+            id: qlemsqni6mycv
+        productUrl:
+          type: string
+          x-stoplight:
+            id: bt5n9ksah2try
+        productImage:
+          type: string
+          x-stoplight:
+            id: o409lmamrkk5d
+        variantImage:
+          type: string
+          x-stoplight:
+            id: ajcqtqgjq1do4
+        minQuantity:
+          type: integer
+          x-stoplight:
+            id: 9ibk95d8cl2af
+        batchSize:
+          type: integer
+          x-stoplight:
+            id: cn10jiebt0wrx
+        quantity:
+          type: integer
+          x-stoplight:
+            id: np1ygjhfaqru0
+        stock:
+          type: integer
+          x-stoplight:
+            id: e2hja4pryngn9
+        originalPrice:
+          type: number
+          x-stoplight:
+            id: oz5qc8j5ij1yo
+        salePrice:
+          type: number
+          x-stoplight:
+            id: lxxhin62saqpd
+        noBargainPrice:
+          type: number
+          x-stoplight:
+            id: tjy6g31tvemtr
+        actualPrice:
+          type: number
+          x-stoplight:
+            id: tlhvo75mmtzpd
+        totalAmount:
+          type: number
+          x-stoplight:
+            id: uqaeg6qrzj8l9
+        exchangedOriginalPrice:
+          type: number
+          x-stoplight:
+            id: joir9j3nzgx4t
+        exchangedSalePrice:
+          type: number
+          x-stoplight:
+            id: grzmz6xu1h82t
+        exchangedActualPrice:
+          type: number
+          x-stoplight:
+            id: 59efdfjddu2ge
+        exchangedTotalAmount:
+          type: number
+          x-stoplight:
+            id: x7k7hlmqd3sbu
+        timestamp:
+          type: string
+          x-stoplight:
+            id: h53rvgi8e7orb
+        currency:
+          $ref: '#/components/schemas/SimpleCurrencyView'
+          x-stoplight:
+            id: 2lm68ztsr5djh
+        remark:
+          type: string
+          x-stoplight:
+            id: lqj7h6r2qhgtr
+        note:
+          type: string
+          x-stoplight:
+            id: ku7mttib97sm4
+        skuId:
+          type: string
+          x-stoplight:
+            id: u7byenc50pyiy
+        specId:
+          type: string
+          x-stoplight:
+            id: wle20dvo43mk7
+        skuHash:
+          type: string
+          x-stoplight:
+            id: n6jsk6ifw9wfg
+        pricePolicy:
+          type: array
+          x-stoplight:
+            id: d1i33h58m62ob
+          items:
+            $ref: '#/components/schemas/SimplePricePolicyView'
+            x-stoplight:
+              id: 653fla5delv64
+        variantProperties:
+          type: array
+          x-stoplight:
+            id: efe3o1arcrp46
+          items:
+            $ref: '#/components/schemas/SimpleVariantPropertiesView'
+            x-stoplight:
+              id: 8vjgzfjw6r0kn
+        purchasedQuantity:
+          type: integer
+          x-stoplight:
+            id: 3fm2fm0af7dgz
+        receivedQuantity:
+          type: integer
+          x-stoplight:
+            id: ap0rcg6wsb7b0
+        needToConfirm:
+          type: boolean
+          x-stoplight:
+            id: s92s5jtgnf6tc
+        unit:
+          type: string
+          x-stoplight:
+            id: xo6attviydm05
+    OrderFinancialView:
+      title: OrderFinancialView
+      x-stoplight:
+        id: 8x00ni0iq1121
+      type: object
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: string
+          x-stoplight:
+            id: 84onzvxekms7p
+        amount:
+          type: number
+          x-stoplight:
+            id: we66wr9iqic4v
+        currency:
+          type: string
+          x-stoplight:
+            id: y21vix4sqylwi
+        reference:
+          type: string
+          x-stoplight:
+            id: rsil6ln1ecq7h
+        memo:
+          type: string
+          x-stoplight:
+            id: d1f1ntkgy2c12
+        hash:
+          type: string
+          x-stoplight:
+            id: wov7dfxgkuaeo
+        txid:
+          type: string
+          x-stoplight:
+            id: m0mmmlq9t3eyr
+        note:
+          type: string
+          x-stoplight:
+            id: 61vw37xlsmzxa
+        reason:
+          type: string
+          x-stoplight:
+            id: p6jtzsm09tg2g
+        teller:
+          $ref: '#/components/schemas/SimpleUserView'
+          x-stoplight:
+            id: 96at9zy80lwoj
+        tellerRole:
+          type: string
+          x-stoplight:
+            id: e3gx3qracot8s
+        type:
+          $ref: '#/components/schemas/FinancialTypeView'
+          x-stoplight:
+            id: z8quyyks0f901
+        financialAccount:
+          $ref: '#/components/schemas/CategoryFinancialAccountView'
+          x-stoplight:
+            id: hpqzmla3223fq
+    OrderFeeView:
+      title: OrderFeeView
+      x-stoplight:
+        id: 9lcldk5si2kdh
+      type: object
+      properties:
+        id:
+          type: string
+        service:
+          type: string
+          x-stoplight:
+            id: 2cavqwff95117
+        type:
+          $ref: '#/components/schemas/FeeView'
+          x-stoplight:
+            id: nx1bai9pxvkiw
+        provisionalAmount:
+          type: number
+          x-stoplight:
+            id: lbymqdagademc
+        actualAmount:
+          type: number
+          x-stoplight:
+            id: j8xloivfm0yfv
+        manual:
+          type: boolean
+          x-stoplight:
+            id: 9pbvsrp9w57uh
+        free:
+          type: boolean
+          x-stoplight:
+            id: cq8ngdo84rgfg
+        reason:
+          type: string
+          x-stoplight:
+            id: 8f2lshvw74zye
+        position:
+          type: integer
+          x-stoplight:
+            id: u1e15462v7h0y
+        priceFormula:
+          type: string
+          x-stoplight:
+            id: r94gvvq6fzicy
+        quantityFormula:
+          type: string
+          x-stoplight:
+            id: q2l9c8a57e1c6
+        provisionalPrice:
+          type: number
+          x-stoplight:
+            id: fjfgkgq18fqvn
+        actualPrice:
+          type: number
+          x-stoplight:
+            id: zexqlp8jb46ku
+        provisionalQuantity:
+          type: number
+          x-stoplight:
+            id: 7iud36862ngi3
+        actualQuantity:
+          type: string
+          x-stoplight:
+            id: muxybq7vfqoxu
+        oldFlag:
+          type: boolean
+          x-stoplight:
+            id: uhhs7p9m2gup2
+        manualPrice:
+          type: boolean
+          x-stoplight:
+            id: 6td11eabox9xb
+        manualQuantity:
+          type: boolean
+          x-stoplight:
+            id: nxaccrn68laq3
+    SimpleStaffView:
+      title: SimpleStaffView
+      x-stoplight:
+        id: a1systxi0k4s3
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+          x-stoplight:
+            id: 3a1iq5wpxc3v6
+        email:
+          type: string
+          x-stoplight:
+            id: pqdrfpfoj5av1
+        fullname:
+          type: string
+          x-stoplight:
+            id: 6lm9w3q2672io
+        nickname:
+          type: string
+          x-stoplight:
+            id: qa8kvm7n2wr6o
+        avatar:
+          type: string
+          x-stoplight:
+            id: u72z2rvmuesn9
+        phone:
+          type: string
+          x-stoplight:
+            id: 318en0utvk7ts
+        authorities:
+          type: array
+          x-stoplight:
+            id: 2fscfzev67k09
+          items:
+            x-stoplight:
+              id: 92dcd1w3ufulq
+            type: string
+    SimplePurchasingAccountView:
+      title: SimplePurchasingAccountView
+      x-stoplight:
+        id: yqwmnxiwxdybu
+      type: object
+      properties:
+        id:
+          type: integer
+        account:
+          type: string
+          x-stoplight:
+            id: wqisp8pa2das4
+        name:
+          type: string
+          x-stoplight:
+            id: bm0x2cd9oarqx
+        description:
+          type: string
+          x-stoplight:
+            id: mgtp3y196t07m
+        marketPlace:
+          $ref: '#/components/schemas/SimpleMarketplaceView'
+          x-stoplight:
+            id: n88ju8u4jqdan
+    CustomerGroupView:
+      title: CustomerGroupView
+      x-stoplight:
+        id: u5m1shnpk43ec
+      type: object
+      properties:
+        id:
+          type: integer
+        tenantId:
+          type: string
+          x-stoplight:
+            id: mazjo94zo7bcy
+        code:
+          type: string
+          x-stoplight:
+            id: v5cwhqwqxojai
+        name:
+          type: string
+          x-stoplight:
+            id: 1vro6dttk8bir
+        description:
+          type: string
+          x-stoplight:
+            id: eka2cqmd3qr32
+        configGroup:
+          $ref: '#/components/schemas/CategoryConfigGroupView'
+          x-stoplight:
+            id: r93q5p6v03x5q
+        createdBy:
+          $ref: '#/components/schemas/SimpleUserView'
+          x-stoplight:
+            id: cps4f39jmdgwg
+        modifiedBy:
+          $ref: '#/components/schemas/SimpleUserView'
+          x-stoplight:
+            id: k4hkbmlzx9plf
+        createdAt:
+          type: string
+          x-stoplight:
+            id: lp7x8tvnrt571
+        modifiedAt:
+          type: string
+          x-stoplight:
+            id: fu1dw76ynfk39
+        emdPercent:
+          type: number
+          x-stoplight:
+            id: pauf8hnb0qw4u
+        categoryConfigGroups:
+          $ref: '#/components/schemas/CategoryConfigGroupView'
+          x-stoplight:
+            id: bl8eums033pwv
+    OrderPurchaseView:
+      title: OrderPurchaseView
+      x-stoplight:
+        id: 9mplldqno4qfo
+      type: object
+      properties:
+        id:
+          type: string
+        supplierName:
+          type: string
+          x-stoplight:
+            id: gea34jryl516u
+        supplierId:
+          type: string
+          x-stoplight:
+            id: 2val5hj02bzi3
+        vendorId:
+          type: string
+          x-stoplight:
+            id: 802sjkgllgzz3
+        vendorUsername:
+          type: string
+          x-stoplight:
+            id: uzd9antd1k49v
+        vendorOrderCode:
+          type: string
+          x-stoplight:
+            id: pwtekpaw14f8o
+        supplierOrderCode:
+          type: string
+          x-stoplight:
+            id: 32qtcr0w2lamt
+        supplierShipmentCode:
+          type: string
+          x-stoplight:
+            id: v4jud5312c974
+    CustomerLevelView:
+      title: CustomerLevelView
+      x-stoplight:
+        id: 576l8l2s14ikq
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: kg9nf3qyu5s9g
+        minPoint:
+          type: string
+          x-stoplight:
+            id: kyhy5qb1ia9y5
+        maxPoint:
+          type: string
+          x-stoplight:
+            id: rq8sdox6qz3cx
+        imageUrl:
+          type: string
+          x-stoplight:
+            id: njv4fcqxkno92
+    CustomerAuthorities:
+      title: CustomerAuthorities
+      x-stoplight:
+        id: n8ocmme3u6c6m
+      type: object
+      properties:
+        importParcel:
+          type: boolean
+          x-stoplight:
+            id: 63u3b3vq5wcff
+        printParcelStamp:
+          type: boolean
+          x-stoplight:
+            id: vfi8qhf792mer
+        draftServicesEnable:
+          type: boolean
+          x-stoplight:
+            id: 6wt25yhctiz2i
+        openAPI:
+          type: boolean
+          x-stoplight:
+            id: 7yps0vvbzhjga
+        editCart:
+          type: boolean
+          x-stoplight:
+            id: 33wgda3lglysv
+        shopkeeper:
+          type: boolean
+          x-stoplight:
+            id: 8nf9nnp0ke7hf
+    CustomerAccessTokenView:
+      title: CustomerAccessTokenView
+      x-stoplight:
+        id: yxsyen7anrers
+      type: object
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+          x-stoplight:
+            id: vt6b9jshafmoe
+        secret:
+          type: string
+          x-stoplight:
+            id: 3a3yw7xg11r3k
+        name:
+          type: string
+          x-stoplight:
+            id: 4z4pjj5guetdt
+        description:
+          type: string
+          x-stoplight:
+            id: pcpv8kd8h5m04
+        enable:
+          type: string
+          x-stoplight:
+            id: br15lv64erl2a
+    SimpleCurrencyView:
+      title: SimpleCurrencyView
+      x-stoplight:
+        id: k3vpt2oaam427
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+          x-stoplight:
+            id: cjxlfdl8scobn
+        name:
+          type: string
+          x-stoplight:
+            id: 16p019u8i1nnc
+        description:
+          type: string
+          x-stoplight:
+            id: zyo0z153veu5v
+        symbol:
+          type: string
+          x-stoplight:
+            id: kfcxhjdvbxpbf
+        precision:
+          type: integer
+          x-stoplight:
+            id: y1gvykx6a5deu
+        prefix:
+          type: string
+          x-stoplight:
+            id: 9ehanvixo6s3w
+        suffix:
+          type: string
+          x-stoplight:
+            id: 2yx3i9avbia0p
+        numberFormat:
+          type: string
+          x-stoplight:
+            id: kwfrvm2xqnzju
+    SimpleUserView:
+      title: SimpleUserView
+      x-stoplight:
+        id: c8nzugk3w1bar
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+          x-stoplight:
+            id: wglouv6p2gykb
+        email:
+          type: string
+          x-stoplight:
+            id: n13ypyilsp90t
+        fullname:
+          type: string
+          x-stoplight:
+            id: xpg3ygcninjas
+        nickname:
+          type: string
+          x-stoplight:
+            id: ys1vmgg9y7ugn
+        avatar:
+          type: string
+          x-stoplight:
+            id: fawi3nwe69agm
+        phone:
+          type: string
+          x-stoplight:
+            id: 14gn96j68gu1k
+        staff:
+          type: boolean
+          x-stoplight:
+            id: 840qrl8348etj
+    FinancialTypeView:
+      title: FinancialTypeView
+      x-stoplight:
+        id: p3rzj0bvftkry
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+          x-stoplight:
+            id: mgv3k71mwaio2
+        name:
+          type: string
+          x-stoplight:
+            id: fwqj9mwwq5147
+        description:
+          type: string
+          x-stoplight:
+            id: oznnroswuec9v
+        position:
+          type: integer
+          x-stoplight:
+            id: rpjkivazlpl6l
+    CategoryFinancialAccountView:
+      title: CategoryFinancialAccountView
+      x-stoplight:
+        id: 26gwqthjo7fdw
+      type: object
+      properties:
+        id:
+          type: string
+        tenantId:
+          type: string
+          x-stoplight:
+            id: 0u7bijlbqg83a
+        code:
+          type: string
+          x-stoplight:
+            id: wkosjs6i0heqm
+        name:
+          type: string
+          x-stoplight:
+            id: 6gax3aiqafzu5
+        description:
+          type: string
+          x-stoplight:
+            id: tv8ykarpguc1u
+    FeeView:
+      title: FeeView
+      x-stoplight:
+        id: 5z2agk3uim5uo
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+          x-stoplight:
+            id: vw3wpnazyz95v
+        name:
+          type: string
+          x-stoplight:
+            id: zovqzgg0m3e79
+        description:
+          type: string
+          x-stoplight:
+            id: ixse8vweqx1q9
+        service:
+          type: string
+          x-stoplight:
+            id: ebinw1792ms5r
+        priceFormula:
+          type: string
+          x-stoplight:
+            id: f28y20wn1t0uu
+        quantityFormula:
+          type: string
+          x-stoplight:
+            id: 72k8hflp66ilq
+        shippingWeightFormula:
+          type: string
+          x-stoplight:
+            id: yb7e77mn87y8o
+        position:
+          type: string
+          x-stoplight:
+            id: 2ahte545dibfa
+        validFrom:
+          type: string
+          x-stoplight:
+            id: xfq6c3cnqa37k
+        validTo:
+          type: string
+          x-stoplight:
+            id: 9g7ukorr2gku8
+        appliedScope:
+          type: string
+          x-stoplight:
+            id: u7uy1enwer4sr
+        shipping:
+          type: string
+          x-stoplight:
+            id: 7na03wy76zxc7
+        additional:
+          type: string
+          x-stoplight:
+            id: 0zme8u8f441ig
+        minFee:
+          type: number
+          x-stoplight:
+            id: hzlmwo155fcfl
+        maxFee:
+          type: number
+          x-stoplight:
+            id: ai8wy9co7lvxw
+        feeMetadata:
+          type: object
+          x-stoplight:
+            id: t43nckzj6k5cj
+        language:
+          type: object
+          x-stoplight:
+            id: fwnb5ab9l4p7q
+        shippingClass:
+          type: string
+          x-stoplight:
+            id: hmmaf0blvnihq
+    CategoryConfigGroupView:
+      title: CategoryConfigGroupView
+      x-stoplight:
+        id: d0qk2idzvjy25
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          x-stoplight:
+            id: 1iot77g4kc77e
+        description:
+          type: string
+          x-stoplight:
+            id: e7wyirohfx69y
+        validFrom:
+          type: string
+          x-stoplight:
+            id: 4ytqj3xw57op0
+        validTo:
+          type: string
+          x-stoplight:
+            id: oqpux640dqn2f
+        markupRateScope:
+          type: string
+          x-stoplight:
+            id: 8l6b9r6ha8go7
+        markupRateFormula:
+          type: string
+          x-stoplight:
+            id: nvq69usi348g9
+        markupRateViewTemplate:
+          type: string
+          x-stoplight:
+            id: e7cwqwni07kwc
+        createdBy:
+          $ref: '#/components/schemas/SimpleUserView'
+          x-stoplight:
+            id: 7g4clvl1lided
+        modifiedBy:
+          $ref: '#/components/schemas/SimpleUserView'
+          x-stoplight:
+            id: a7ifu8pfdsm7l
+        createdAt:
+          type: string
+          x-stoplight:
+            id: ylwcoe40tlgr3
+        modifiedAt:
+          type: string
+          x-stoplight:
+            id: 2u3425vig7t1j
+  responses: {}
+  requestBodies: {}
+paths:
+  /api/customer/cart:
+    get:
+      summary: Danh sách sản phẩm trong giỏ
+      tags:
+        - cart
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartMerchantView'
+                  x-stoplight:
+                    id: ijbygsm1se0oh
+          headers: {}
+      operationId: customer-cart-filter
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: query
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+        - schema:
+            type: integer
+          in: query
+          name: page
+        - schema:
+            type: integer
+          in: query
+          name: size
+        - schema:
+            type: string
+          in: query
+          name: sort
+      description: Danh sách sản phẩm trong giỏ
+    post:
+      summary: Thêm sản phẩm vào giỏ hàng
+      operationId: post-api-customer-cart---copy
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartMerchantView'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CartMerchantView'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              examples:
+                Example 1:
+                  value:
+                    title: exchange_rate_not_found
+                    detail: Can not detect exchange rate
+                    status: 400
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToCartCommand'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      description: Thêm sản phẩm trong giỏ hàng
+      tags:
+        - cart
+  '/api/customer/cart/{id}':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Xóa sản phẩm giỏ hàng
+      operationId: customer-cart-delete
+      responses:
+        '204':
+          description: No Content
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      description: Xóa sản phẩm giỏ hàng
+      tags:
+        - cart
+  /api/customer/profile/register:
+    post:
+      summary: ''
+      operationId: customer-register
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerView'
+      description: Đăng ký
+      parameters: []
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRegisterCommand'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+  /api/categories/order_services:
+    get:
+      summary: Danh sách dịch vụ đơn mua hộ
+      tags:
+        - order_services
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderServiceView'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              examples:
+                Example 1:
+                  value:
+                    title: config_group
+                    detail: The config group is missing...
+                    status: 400
+      operationId: get-api-categories-order_services
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: size
+          description: '100'
+  '/api/customer/cart/{cartId}/services':
+    parameters:
+      - schema:
+          type: string
+        name: cartId
+        in: path
+        required: true
+    post:
+      summary: Thêm dịch vụ cho sản phẩm
+      operationId: post-api-customer-cart-id-services
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderServiceView'
+                  x-stoplight:
+                    id: 86jeksmcnnpyl
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestProblem'
+              examples:
+                Example 1:
+                  value:
+                    title: merchant_not_found
+                    detail: Can not found merchant with id '$cartId'
+                    status: 400
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: list of services
+              items:
+                x-stoplight:
+                  id: 2qz15nclnoxba
+                type: string
+      tags:
+        - order_services
+  /api/customer/orders:
+    post:
+      summary: Đặt đơn hàng
+      operationId: post-api-customer-orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerOrderView'
+                  x-stoplight:
+                    id: jm6yo0nh0px0s
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-pin
+          description: '123456'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerOrderCreateCommand'
+      tags:
+        - order
+tags:
+  - name: cart
+security:
+  - bearerAuth: []
